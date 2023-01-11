@@ -11,7 +11,7 @@ const PreFetchDemo = lazy(
       /* webpackChunkName: "PreFetchDemo" */
       /*webpackPrefetch: true*/
       '@/components/PreFetchDemo'
-    )
+    ),
 )
 // preload
 const PreloadDemo = lazy(
@@ -20,14 +20,14 @@ const PreloadDemo = lazy(
       /* webpackChunkName: "PreloadDemo" */
       /*webpackPreload: true*/
       '@/components/PreloadDemo'
-    )
+    ),
 )
 
 function App() {
   const [count, setCounts] = useState('')
   const [show, setShow] = useState(false)
 
-  const onChange = (e: any) => {
+  const onChange = (e: { target: { value: React.SetStateAction<string> } }) => {
     setCounts(e.target.value)
   }
 
@@ -41,15 +41,15 @@ function App() {
     <>
       <h2>webpack5+react+ts</h2>
       <Demo1 />
-      <img src={smallImg} alt="小于10kb的图片" />
-      <img src={bigImg} alt="大于于10kb的图片" />
-      <div className="smallImg"></div> {/* 小图片背景容器 */}
-      <div className="bigImg"></div> {/* 大图片背景容器 */}
+      <img src={smallImg} alt='小于10kb的图片' />
+      <img src={bigImg} alt='大于于10kb的图片' />
+      <div className='smallImg'></div> {/* 小图片背景容器 */}
+      <div className='bigImg'></div> {/* 大图片背景容器 */}
       <p>受控组件</p>
-      <input type="text" value={count} onChange={onChange} />
+      <input type='text' onChange={onChange} />
       <br />
       <p>非受控组件</p>
-      <input type="text" />
+      <input type='text' />
       <h2 onClick={onClick}>展示</h2>
       {/* show为true时加载LazyDemo组件 */}
       {show && (
