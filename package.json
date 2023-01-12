@@ -15,6 +15,7 @@
     "build:prod": "cross-env NODE_ENV=production BASE_ENV=production webpack -c build/webpack.prod.js",
     "build:analy": "cross-env NODE_ENV=production BASE_ENV=production webpack -c build/webpack.analy.js",
     "prettier": "prettier --write \"**/**.{js,jsx,tsx,ts,less,md,json}\" --loglevel warn",
+    "lint:less": "stylelint src/**/*.less --fix  --custom-syntax postcss-less",
     "eslint": "eslint --ext .js,.tsx,.ts src",
     "eslintfix": "eslint --fix --ext .js,.tsx,.ts src",
     "prepare": "husky install",
@@ -24,6 +25,9 @@
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
       "eslint --fix"
+    ],
+    "*.less": [
+      "stylelint --fix  --custom-syntax postcss-less"
     ]
   },
   "husky": {
@@ -75,11 +79,17 @@
     "less-loader": "^11.1.0",
     "lint-staged": "^13.1.0",
     "mini-css-extract-plugin": "^2.7.2",
+    "postcss-less": "^6.0.0",
     "postcss-loader": "^7.0.2",
     "purgecss-webpack-plugin": "^5.0.0",
     "react-refresh": "^0.14.0",
     "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^3.3.1",
+    "stylelint": "^14.16.1",
+    "stylelint-config-css-modules": "^4.1.0",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-order": "^6.0.1",
+    "stylelint-webpack-plugin": "^3.3.0",
     "terser-webpack-plugin": "^5.3.6",
     "thread-loader": "^3.0.4",
     "webpack-bundle-analyzer": "^4.7.0",

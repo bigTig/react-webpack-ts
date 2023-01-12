@@ -5,6 +5,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const StylelintPlugin = require('stylelint-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development' // 是否是开发模式
 
@@ -136,6 +137,16 @@ module.exports = {
     // 就可以通过该环境变量设置对应环境的接口地址和其他数据,
     new webpack.DefinePlugin({
       'process.env.BASE_ENV': JSON.stringify(process.env.BASE_ENV),
+    }),
+    new StylelintPlugin({
+      configFile: path.resolve(__dirname, '../.stylelintrc.js'),
+      extensions: ['less'],
+      files: 'src/**/*.less',
+      fix: true,
+      customSyntax: 'postcss-less',
+      lintDirtyModulesOnly: true,
+      threads: true,
+      exclude: ['node_modules'],
     }),
   ],
   // 使用文件缓存

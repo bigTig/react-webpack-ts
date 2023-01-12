@@ -46,7 +46,7 @@ function App() {
       <div className='smallImg'></div> {/* 小图片背景容器 */}
       <div className='bigImg'></div> {/* 大图片背景容器 */}
       <p>受控组件</p>
-      <input type='text' onChange={onChange} />
+      <input type='text' value={count} onChange={onChange} />
       <br />
       <p>非受控组件</p>
       <input type='text' />
