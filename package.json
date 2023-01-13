@@ -44,8 +44,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ant-design/pro-components": "^2.3.52",
+    "@ant-design/use-emotion-css": "^1.0.4",
+    "@emotion/css": "^11.10.5",
+    "antd": "^5.1.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-sortable-hoc": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
@@ -59,6 +64,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@types/history": "^4.7.7",
     "@typescript-eslint/parser": "^5.48.1",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",

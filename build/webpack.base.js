@@ -50,9 +50,9 @@ module.exports = {
       },
       // 如果node_moduels中也有要处理的语法，可以把js|jsx文件配置加上
       // {
-      //  test: /.(js|jsx)$/,
-      //  use: 'babel-loader'
-      // }
+      //   test: /.(js|jsx)$/,
+      //   use: 'babel-loader',
+      // },
       {
         // 配置 style-loader css-loader 解析 css less 文件
         // style-loader: 把解析后的css代码从js中抽离,放到头部的style标签中(在运行时做的)
