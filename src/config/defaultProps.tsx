@@ -57,6 +57,7 @@ export default {
                 name: '一一级列表页面',
                 icon: <CrownFilled />,
                 component: './Welcome',
+                hideInMenu: false,
               },
               {
                 path: 'sub-sub-page2',
@@ -90,6 +91,40 @@ export default {
   },
   location: {
     pathname: '/',
+  },
+  siderWidth: 200,
+  title: '余友友运营平台',
+  logo: 'https://gw.alipayobjects.com/mdn/rms_b5fcc5/afts/img/A*1NHAQYduQiQAAAAAAAAAAABkARQnAQ',
+  token: {
+    header: {
+      colorBgHeader: '#217BA0',
+      colorHeaderTitle: '#FFFFFF',
+      colorBgMenuItemHover: '#217BA0',
+      colorBgMenuItemSelected: '#46A0C0',
+      colorTextMenuSelected: '#FFFFFF',
+      colorTextMenuActive: '#FFFFFF',
+      colorTextMenu: '#FFFFFF',
+      colorTextMenuSecondary: '#FFFFFF',
+      colorBgRightActionsItemHover: '#217BA0',
+      colorTextRightActionsItem: '#FFFFFF',
+      heightLayoutHeader: 64,
+    },
+    sider: {
+      colorMenuBackground: '#FFFFFF', // 背景色
+      colorBgMenuItemCollapsedHover: '#EFFAFF',
+      colorBgMenuItemCollapsedSelected: '#EFFAFF',
+      colorBgMenuItemCollapsedElevated: '#EFFAFF',
+      colorTextMenuSelected: '#217BA0', // 选中的字体颜色
+      colorTextMenuItemHover: '#217BA0', // 鼠标经过的字体颜色
+      colorTextMenuActive: '#217BA0', //
+      colorTextMenu: 'rgba(0,0,0,0.65)', // 字体颜色
+      paddingInlineLayoutMenu: 8,
+      paddingBlockLayoutMenu: 8,
+    },
+    pageContainer: {
+      paddingInlinePageContainerContent: 12,
+      paddingBlockPageContainerContent: 0,
+    },
   },
   bgLayoutImgList: [
     {
