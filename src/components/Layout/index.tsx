@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import defaultProps from '@/config/defaultProps'
 import defaultSetting from '@/config/defaultSettings'
-import { Routes } from '@/config/routes'
+import { MenuConfig } from '@/config/menus'
 import {
   PageContainer,
   ProConfigProvider,
@@ -12,11 +12,19 @@ import {
 import { css } from '@emotion/css'
 import { Route } from 'antd/es/breadcrumb/Breadcrumb'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import RightContent from '../RightContent'
 
-const Layout = () => {
-  const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1')
+type LayoutProps = {
+  content: React.ReactNode
+}
+
+const locaPathname = window.location.pathname
+
+const Layout = (props: LayoutProps) => {
+  console.log(locaPathname)
+  const [pathname, setPathname] = useState(locaPathname)
+  const navigate = useNavigate()
 
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>(defaultSetting)
 
@@ -28,7 +36,7 @@ const Layout = () => {
       <ProLayout
         hide={isHideSide}
         prefixCls='react-prefix'
-        route={{ routes: Routes }}
+        route={{ routes: MenuConfig }}
         {...defaultProps}
         location={{
           pathname,
@@ -56,7 +64,7 @@ const Layout = () => {
         itemRender={(route, params, routes: Array<Route>) => {
           const last = routes.indexOf(route) === routes.length - 1
           // const isHideMenu
-          console.log(route)
+          // console.log(route)
 
           return last ? (
             <>
@@ -105,15 +113,18 @@ const Layout = () => {
             </Link>
           )
         }}
-        menuItemRender={(item, dom) => (
-          <div
-            onClick={() => {
-              setPathname(item.path || '/welcome')
-            }}
-          >
-            {dom}
-          </div>
-        )}
+        menuItemRender={(itemProps, defaultDom: React.ReactNode) => {
+          return (
+            <div
+              onClick={() => {
+                navigate(itemProps.itemPath)
+                setPathname(itemProps.itemPath)
+              }}
+            >
+              {defaultDom}
+            </div>
+          )
+        }}
         {...settings}
       >
         <PageContainer
@@ -123,11 +134,11 @@ const Layout = () => {
             height: calc(100vh - 64px);
           `}
         >
-          <div style={{ height: 1000, backgroundColor: '#fff' }}>12</div>
+          {props.content}
         </PageContainer>
 
         <SettingDrawer
-          pathname={pathname}
+          pathname={''}
           enableDarkTheme={false}
           getContainer={() => document.getElementById('root')}
           settings={settings}
