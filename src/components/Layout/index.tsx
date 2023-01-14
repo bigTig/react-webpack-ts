@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import defaultProps from '@/config/defaultProps'
 import defaultSetting from '@/config/defaultSettings'
-import { LeftOutlined } from '@ant-design/icons'
+import { Routes } from '@/config/routes'
 import {
   PageContainer,
   ProConfigProvider,
@@ -28,6 +28,7 @@ const Layout = () => {
       <ProLayout
         hide={isHideSide}
         prefixCls='react-prefix'
+        route={{ routes: Routes }}
         {...defaultProps}
         location={{
           pathname,
@@ -52,19 +53,14 @@ const Layout = () => {
         }}
         menuFooterRender={undefined}
         onMenuHeaderClick={e => console.log(e)}
-        menuContentRender={(props, defaultDom) => {
-          console.log({ props })
-          console.log({ defaultDom })
-          return defaultDom
-        }}
-        itemRender={(route: Route, params, routes: Array<Route>) => {
+        itemRender={(route, params, routes: Array<Route>) => {
           const last = routes.indexOf(route) === routes.length - 1
           // const isHideMenu
-          // console.log(params)
+          console.log(route)
 
           return last ? (
             <>
-              <span
+              {/* <span
                 className={css`
                   width: 68px;
                   height: 32px;
@@ -81,8 +77,16 @@ const Layout = () => {
               >
                 <LeftOutlined style={{ marginRight: 5, fontSize: 12 }} />
                 返回
+              </span> */}
+              <span
+                className={css`
+                  line-height: 32px;
+                  height: 32px !important;
+                  display: inline-block;
+                `}
+              >
+                {route.breadcrumbName}
               </span>
-              <span>{route.breadcrumbName}</span>
             </>
           ) : (
             <Link
