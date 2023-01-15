@@ -6,8 +6,11 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
+const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 
 const isDev = process.env.NODE_ENV === 'development' // 是否是开发模式
+const cssRegex = /\.css$/
+const lessRegex = /\.(less)$/
 
 module.exports = {
   // 入口文件
@@ -61,12 +64,22 @@ module.exports = {
         // 最后借助style-loader把css插入到头部style标签中
         // less-loader: 解析less文件代码,把less编译为css
         // less: less核心
-        test: /.css$/,
+        test: cssRegex,
         include: [path.resolve(__dirname, '../src')],
         use: [
           // 开发环境使用style-looader,打包模式抽离css
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 3,
+              modules: {
+                mode: 'local',
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
+            },
+          },
+
           // postcss-loader就是来给css3加浏览器前缀的
           // postcss-loader：处理css时自动加前缀
           // autoprefixer：决定添加哪些浏览器前缀到css中
@@ -75,12 +88,20 @@ module.exports = {
         ],
       },
       {
-        test: /.less$/, // 匹配所有的 less 文件
+        test: lessRegex, // 匹配所有的 less 文件
         include: [path.resolve(__dirname, '../src')],
         use: [
           // 开发环境使用style-looader,打包模式抽离css
           isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 4,
+              modules: {
+                localIdentName: '[local]_[hash:base64:5]',
+              },
+            },
+          },
           'postcss-loader',
           'less-loader',
         ],

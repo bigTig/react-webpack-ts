@@ -18,6 +18,7 @@ const Name = () => {
       lineHeight: '48px',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
+      color: '#fff',
       [`@media only screen and (max-width: ${token.screenMD}px)`]: {
         display: 'none',
       },

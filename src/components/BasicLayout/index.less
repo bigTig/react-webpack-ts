@@ -1,0 +1,41 @@
+@import url('@/styles/variable.less');
+
+.basic-layout {
+  width: 100%;
+  height: 100%;
+
+  .basic-layout-header {
+    display: flex;
+    padding: 0;
+
+    .basic-layout-header-logo {
+      width: 200px;
+      height: 100%;
+      min-width: 200px;
+    }
+
+    .basic-layout-header-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+    }
+  }
+}
+
+.basic-sider {
+  box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 5%);
+
+  .basic-sider-collapsed {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    color: @white;
+    cursor: pointer;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    // box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 12%);
+  }
+}

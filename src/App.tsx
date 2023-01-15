@@ -1,10 +1,8 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
-import Layout from './components/Layout'
-import { RenderRoutes } from './router/router'
+import BasicLayout from './components/BasicLayout'
 
 const App = () => {
-  return <Layout content={RenderRoutes()} />
+  return <BasicLayout />
 }
 
 export default App

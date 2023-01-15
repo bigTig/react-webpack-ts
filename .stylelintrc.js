@@ -6,12 +6,13 @@ module.exports = {
   rules: {
     'selector-class-pattern': [
       // 命名规范 -
-      '^([a-z][a-z0-9]*)(-[a-z0-9]+)*$',
+      '^([a-z][a-z0-9]*)?(-[a-z][a-z0-9]*)*$',
       {
         message: 'Expected class selector to be kebab-case',
       },
     ],
     'color-function-notation': 'legacy',
+    'max-line-length': null,
     'string-quotes': 'single', // 单引号
     'at-rule-empty-line-before': null,
     'at-rule-no-unknown': null,

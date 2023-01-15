@@ -1,0 +1,31 @@
+@import url('@/styles/variable.less');
+
+.basic-breadcrumb {
+  display: flex;
+  align-items: center;
+
+  li {
+    display: flex;
+    align-items: center;
+
+    a:hover {
+      color: @primary-color;
+      background-color: transparent;
+    }
+  }
+
+  .basic-breadcrumb-back {
+    display: inline-block;
+    width: 68px;
+    height: 32px;
+    padding: 5px 11px;
+    margin-right: 12px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 12%);
+    user-select: none;
+  }
+}
