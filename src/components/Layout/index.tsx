@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import defaultProps from '@/config/defaultProps'
 import defaultSetting from '@/config/defaultSettings'
-import { MenuConfig } from '@/config/menus'
 import {
   PageContainer,
   ProConfigProvider,
@@ -36,7 +35,7 @@ const Layout = (props: LayoutProps) => {
       <ProLayout
         hide={isHideSide}
         prefixCls='react-prefix'
-        route={{ routes: MenuConfig }}
+        route={{ routes: [] }}
         {...defaultProps}
         location={{
           pathname,

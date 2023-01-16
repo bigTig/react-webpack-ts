@@ -36,11 +36,11 @@ const BasicBreadcrumb: React.FC<BasicBreadcrumbProps> = props => {
           return (
             <>
               {last ? (
-                <Breadcrumb.Item>
+                <Breadcrumb.Item key={route.path}>
                   <span>{route.breadcrumbName}</span>
                 </Breadcrumb.Item>
               ) : (
-                <Breadcrumb.Item>
+                <Breadcrumb.Item key={route.path}>
                   <Link to={route.path}>{route.breadcrumbName}</Link>
                 </Breadcrumb.Item>
               )}

@@ -1,9 +1,10 @@
+import { MenuItemProps } from '@/config/menus'
 import { Menu, MenuProps } from 'antd'
 import React from 'react'
 import styles from './index.less'
 
-type BasicHeaderMenu = {
-  menuItems: MenuProps['items']
+interface BasicHeaderMenu extends MenuProps {
+  menuItems: MenuItemProps[]
 }
 
 /**
@@ -11,13 +12,15 @@ type BasicHeaderMenu = {
  * @returns
  */
 const BasicHeaderMenu: React.FC<BasicHeaderMenu> = props => {
+  const { menuItems, ...other } = props
+
   return (
     <Menu
       className={styles['basic-layout-header-menu']}
       theme='dark'
       mode='horizontal'
-      defaultSelectedKeys={['2']}
-      items={props.menuItems}
+      items={menuItems}
+      {...other}
     />
   )
 }
