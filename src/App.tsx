@@ -1,9 +1,13 @@
 import React from 'react'
-import BasicLayout from './components/BasicLayout'
-import { MenuConfig } from './config/menus'
+import { RecoilRoot } from 'recoil'
+import Router from './routers'
 
 const App = () => {
-  return <BasicLayout menus={MenuConfig} />
+  return (
+    <RecoilRoot>
+      <Router />
+    </RecoilRoot>
+  )
 }
 
 export default App

@@ -1,5 +1,4 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
-import { setAlpha } from '@ant-design/pro-components'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Avatar } from 'antd'
 import React from 'react'
@@ -34,7 +33,6 @@ const AvatarLogo = () => {
       marginRight: '8px',
       color: token.colorPrimary,
       verticalAlign: 'top',
-      background: setAlpha(token.colorBgContainer, 0.85),
       [`@media only screen and (max-width: ${token.screenMD}px)`]: {
         margin: 0,
       },
