@@ -1,23 +1,16 @@
 import { HOME_URL } from '@/config'
-import { BreadcrumbRouteProps } from '@/global'
 import { breadcrumbAtom } from '@/store/breadcrumb'
-import { LeftOutlined } from '@ant-design/icons'
 import { Breadcrumb } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import styles from './index.less'
 
-interface BasicBreadcrumbProps {
-  routes: BreadcrumbRouteProps[]
-}
-
 /**
  * 面包屑
  * @returns
  */
-const BasicBreadcrumb: React.FC<BasicBreadcrumbProps> = props => {
-  const { routes } = props
+const BasicBreadcrumb: React.FC = () => {
   const { pathname } = useLocation()
   const breadcrumbState = useRecoilValue(breadcrumbAtom)
   const [breadcrumbList, setBreadcrumbList] = useState([])
@@ -27,17 +20,6 @@ const BasicBreadcrumb: React.FC<BasicBreadcrumbProps> = props => {
       setBreadcrumbList(breadcrumbState[pathname])
     }
   }, [breadcrumbState, pathname])
-
-  const breadcrumbBack = () => {
-    const isHideMenu = routes[routes.length - 1].hideMenu
-
-    return isHideMenu ? (
-      <span className={styles['basic-breadcrumb-back']}>
-        <LeftOutlined style={{ marginRight: 5, fontSize: 12 }} />
-        返回
-      </span>
-    ) : null
-  }
 
   const itemRender = () => {
     return (
@@ -66,12 +48,7 @@ const BasicBreadcrumb: React.FC<BasicBreadcrumbProps> = props => {
     )
   }
 
-  return (
-    <Breadcrumb className={styles['basic-breadcrumb']} style={{ margin: '16px 0' }}>
-      {breadcrumbBack()}
-      {itemRender()}
-    </Breadcrumb>
-  )
+  return <Breadcrumb className={styles['basic-breadcrumb']}>{itemRender()}</Breadcrumb>
 }
 
 export default BasicBreadcrumb

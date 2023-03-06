@@ -1,5 +1,3 @@
-import { MenuItemProps } from '@/config/menus'
-import { BreadcrumbRouteProps } from '@/global'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import React, { useState } from 'react'
@@ -12,29 +10,7 @@ import styles from './index.less'
 
 const { Header, Content, Sider } = Layout
 
-const routes: BreadcrumbRouteProps[] = [
-  {
-    path: '/index',
-    breadcrumbName: 'home',
-  },
-  {
-    path: '/first',
-    breadcrumbName: 'first',
-  },
-  {
-    path: '/second',
-    breadcrumbName: 'second',
-    hideMenu: false,
-  },
-]
-
-export interface BasicLayoutProps {
-  menus?: MenuItemProps[]
-}
-
-const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { menus } = props
-
+const BasicLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
@@ -57,7 +33,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
       </Header>
       <Layout>
         <Sider className={styles['basic-sider']} trigger={null} collapsed={collapsed} width={200}>
-          <BasicSider routes={menus} isCollapse={collapsed} />
+          <BasicSider isCollapse={collapsed} />
 
           <div className={styles['basic-sider-collapsed']} onClick={() => setCollapsed(!collapsed)}>
             {!collapsed ? (
@@ -67,8 +43,8 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
             )}
           </div>
         </Sider>
-        <Layout style={{ padding: '0 12px 12px' }}>
-          <BasicBreadcrumb routes={routes} />
+        <Layout className={styles['basic-layout-container']}>
+          <BasicBreadcrumb />
           <Content>
             <Outlet></Outlet>
           </Content>

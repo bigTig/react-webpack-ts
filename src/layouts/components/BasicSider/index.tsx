@@ -12,7 +12,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useSetRecoilState } from 'recoil'
 
 interface BasicSiderProps extends MenuProps {
-  routes: MenuProps['items']
   isCollapse: boolean
 }
 
@@ -70,11 +69,11 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
 
   const getMenuData = () => {
     setMenuList(deepLoopFloat(routerArray))
-    console.log(findAllBreadcrumb(routerArray))
     setBreadcrumbAtom(findAllBreadcrumb(routerArray))
   }
   useEffect(() => {
     getMenuData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // 动态渲染 Icon 图标

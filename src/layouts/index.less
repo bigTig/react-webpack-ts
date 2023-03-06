@@ -21,6 +21,18 @@
       padding: 0 14px;
     }
   }
+
+  .basic-layout-container {
+    background: @body-background;
+
+    :global(.ant-layout-content) {
+      padding: 12px;
+      overflow-x: hidden;
+      box-sizing: border-box;
+      border-radius: @border-radius-base;
+      flex: 1;
+    }
+  }
 }
 
 .basic-sider {
