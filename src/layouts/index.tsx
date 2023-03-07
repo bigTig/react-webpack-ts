@@ -1,3 +1,4 @@
+import defaultProps from '@/config/defaultProps'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import React, { useState } from 'react'
@@ -32,7 +33,12 @@ const BasicLayout: React.FC = () => {
         </div>
       </Header>
       <Layout>
-        <Sider className={styles['basic-sider']} trigger={null} collapsed={collapsed} width={200}>
+        <Sider
+          className={styles['basic-sider']}
+          trigger={null}
+          collapsed={collapsed}
+          width={defaultProps.siderWidth}
+        >
           <BasicSider isCollapse={collapsed} />
 
           <div className={styles['basic-sider-collapsed']} onClick={() => setCollapsed(!collapsed)}>
@@ -44,8 +50,15 @@ const BasicLayout: React.FC = () => {
           </div>
         </Sider>
         <Layout className={styles['basic-layout-container']}>
-          <BasicBreadcrumb />
-          <Content>
+          {defaultProps.breadcrumb ? <BasicBreadcrumb /> : null}
+          <Content
+            style={{
+              padding: defaultProps.token?.pageContainer?.paddingInlinePageContainerContent,
+              paddingTop: defaultProps.breadcrumb
+                ? 0
+                : defaultProps.token?.pageContainer?.paddingInlinePageContainerContent,
+            }}
+          >
             <Outlet></Outlet>
           </Content>
         </Layout>
