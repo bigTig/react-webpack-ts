@@ -1,3 +1,4 @@
+import defaultProps from '@/config/defaultProps'
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Avatar } from 'antd'
@@ -17,7 +18,7 @@ const Name = () => {
       lineHeight: '48px',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      color: '#fff',
+      color: defaultProps.navTheme === 'light' ? token.colorPrimary : token.colorWhite,
       [`@media only screen and (max-width: ${token.screenMD}px)`]: {
         display: 'none',
       },

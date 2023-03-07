@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import defaultProps from '@/config/defaultProps'
 import { routerArray } from '@/routers'
-import { metaRoutersProps } from '@/routers/interface'
+import { deepLoopFloat } from '@/routers/utils/useRouter'
 import { breadcrumbAtom } from '@/store/breadcrumb'
+import { menuAtom } from '@/store/menus'
 import { findAllBreadcrumb, getOpenKeys, searchRoute } from '@/utils'
-import * as Icons from '@ant-design/icons'
 import { Menu, MenuProps } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 interface BasicSiderProps extends MenuProps {
   isCollapse: boolean
@@ -26,6 +27,7 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const { isCollapse } = props
   const { pathname } = useLocation()
   const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
+  const menuRouterState = useRecoilValue(menuAtom)
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [menuList, setMenuList] = useState<MenuItem[]>([])
@@ -51,71 +53,18 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
     setOpenKeys([latestOpenKey])
   }
 
-  const getItem = (
-    label: React.ReactNode,
-    key?: React.Key | null,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: 'group',
-  ): MenuItem => {
-    return {
-      key,
-      icon,
-      children,
-      label,
-      type,
-    } as MenuItem
-  }
-
-  const getMenuData = () => {
-    setMenuList(deepLoopFloat(routerArray))
-    setBreadcrumbAtom(findAllBreadcrumb(routerArray))
-  }
   useEffect(() => {
-    getMenuData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    console.log(routerArray)
+    defaultProps.layout === 'side'
+      ? setMenuList(deepLoopFloat(routerArray))
+      : setMenuList(deepLoopFloat(menuRouterState))
 
-  // 动态渲染 Icon 图标
-  const customIcons: { [key: string]: any } = Icons
-  const addIcon = (name: string) => {
-    return React.createElement(customIcons[name])
-  }
-
-  // 处理后台返回菜单 key 值为 antd 菜单需要的 key 值
-  const deepLoopFloat = (menuList: metaRoutersProps[], newArr: MenuItem[] = []) => {
-    menuList.forEach((item: metaRoutersProps) => {
-      // 下面判断代码解释 *** !item?.children?.length   ==>   (!item.children || item.children.length === 0)
-      if (item.single && item?.children?.length) {
-        return newArr.push(
-          getItem(
-            item.children[0].meta?.title,
-            item.children[0].path,
-            item.children[0].meta?.icon ? addIcon(item.children[0].meta?.icon) : '',
-          ),
-        )
-      }
-
-      if (!item?.children?.length) {
-        return newArr.push(
-          getItem(item.meta?.title, item.path, item.meta?.icon ? addIcon(item.meta?.icon) : ''),
-        )
-      }
-      newArr.push(
-        getItem(
-          item.meta?.title,
-          item.path,
-          item.meta?.icon ? addIcon(item.meta?.icon) : '',
-          deepLoopFloat(item.children),
-        ),
-      )
-    })
-    return newArr
-  }
+    setBreadcrumbAtom(findAllBreadcrumb(routerArray))
+  }, [menuRouterState, setBreadcrumbAtom])
 
   return (
     <Menu
-      theme='dark'
+      theme={defaultProps.navTheme}
       mode='inline'
       triggerSubMenuAction='click'
       openKeys={openKeys}

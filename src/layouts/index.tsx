@@ -1,9 +1,12 @@
 import defaultProps from '@/config/defaultProps'
+import { menuAtom } from '@/store/menus'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { Layout } from 'antd'
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
 import BasicBreadcrumb from './components/BasicBreadcrumb'
+import BasicHeaderMenu from './components/BasicHeaderMenu'
 import BasicSider from './components/BasicSider'
 import LogoBasic from './components/Logo'
 import RightContent from './components/RightContent'
@@ -13,42 +16,45 @@ const { Header, Content, Sider } = Layout
 
 const BasicLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false)
+  const menuRouterState = useRecoilValue(menuAtom)
 
   return (
     <Layout className={styles['basic-layout']}>
-      <Header className={`${styles['basic-layout-header']}`}>
+      <Header
+        className={`${styles['basic-layout-header']} ${
+          defaultProps.navTheme === 'light' ? styles['basic-layout-header-light'] : ''
+        }`}
+      >
         {/* logo */}
         <LogoBasic />
         <div className={styles['basic-layout-header-right']}>
-          {/* <BasicHeaderMenu
-            menuItems={headerMenu || []}
-            selectedKeys={defaultSelectKey.headerSelectKey}
-            onClick={({ key, keyPath }) => {
-              if (key) {
-                handleHeaderMenu(key, keyPath)
-              }
-            }}
-          /> */}
+          {defaultProps.layout === 'mix' ? <BasicHeaderMenu /> : null}
           <RightContent />
         </div>
       </Header>
       <Layout>
-        <Sider
-          className={styles['basic-sider']}
-          trigger={null}
-          collapsed={collapsed}
-          width={defaultProps.siderWidth}
-        >
-          <BasicSider isCollapse={collapsed} />
+        {menuRouterState.length || defaultProps.layout === 'side' ? (
+          <Sider
+            className={styles['basic-sider']}
+            trigger={null}
+            theme={defaultProps.navTheme}
+            collapsed={collapsed}
+            width={defaultProps.siderWidth}
+          >
+            <BasicSider isCollapse={collapsed} />
 
-          <div className={styles['basic-sider-collapsed']} onClick={() => setCollapsed(!collapsed)}>
-            {!collapsed ? (
-              <MenuFoldOutlined style={{ fontSize: 18 }} />
-            ) : (
-              <MenuUnfoldOutlined style={{ fontSize: 18 }} />
-            )}
-          </div>
-        </Sider>
+            <div
+              className={styles['basic-sider-collapsed']}
+              onClick={() => setCollapsed(!collapsed)}
+            >
+              {!collapsed ? (
+                <MenuFoldOutlined style={{ fontSize: 18 }} />
+              ) : (
+                <MenuUnfoldOutlined style={{ fontSize: 18 }} />
+              )}
+            </div>
+          </Sider>
+        ) : null}
         <Layout className={styles['basic-layout-container']}>
           {defaultProps.breadcrumb ? <BasicBreadcrumb /> : null}
           <Content

@@ -6,7 +6,21 @@ export interface DefaultConfigProps {
   }
   siderWidth?: number
   breadcrumb?: boolean
+  /**
+   * @name theme for nav menu
+   * @type  "light" | "dark" | "realDark"
+   */
+  navTheme?: 'dark' | 'light' | undefined
   title?: string
+  /**
+   * @name layout 的布局方式
+   * @type  'side' | 'top' | 'mix'
+   *
+   * @example 顶部菜单 layout="top"
+   * @example 侧边菜单 layout="side"
+   * @example 混合布局 既有顶部也有侧边 layout="mix"
+   */
+  layout?: 'side' | 'top' | 'mix'
   logo?: string
   token?: {
     token?: Partial<AliasToken>
