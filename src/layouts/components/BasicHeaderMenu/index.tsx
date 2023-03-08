@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import defaultProps from '@/config/defaultProps'
 import { routerArray } from '@/routers'
 import { metaRoutersProps } from '@/routers/interface'
 import { deepLoopFloat, getFirstMenu, getOtherMenu, MenuItem } from '@/routers/utils/useRouter'
+import { systemConfigAtom } from '@/store/config'
 import { menuAtom } from '@/store/menus'
 import { Menu, MenuProps } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import styles from './index.less'
 
 /**
@@ -18,8 +18,11 @@ const BasicHeaderMenu: React.FC = () => {
   const { pathname } = useLocation()
   const navigate = useNavigate()
   const setMenuAtom = useSetRecoilState(menuAtom)
+  const systemConfigState = useRecoilValue(systemConfigAtom)
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
+
+  const { navTheme } = systemConfigState
 
   // 点击当前菜单跳转页面
   const clickMenu: MenuProps['onClick'] = ({ key }: { key: string }) => {
@@ -54,7 +57,7 @@ const BasicHeaderMenu: React.FC = () => {
   return (
     <Menu
       className={styles['basic-layout-header-menu']}
-      theme={defaultProps.navTheme}
+      theme={navTheme}
       mode='horizontal'
       selectedKeys={selectedKeys}
       items={menuList}

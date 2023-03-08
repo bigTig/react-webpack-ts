@@ -9,13 +9,14 @@ const defaultProps: DefaultConfigProps = {
   },
   siderWidth: 200,
   breadcrumb: true,
+  headerTheme: false,
   navTheme: 'light',
   layout: 'mix',
   title: '余友友运营平台',
   logo: 'https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg',
   token: {
     token: {
-      colorPrimary: '#217BA0', // 品牌色是体现产品特性和传播理念最直观的视觉元素之一
+      colorPrimary: '#00b96b', // 品牌色是体现产品特性和传播理念最直观的视觉元素之一
       colorSuccess: '#7ed321', // 用于表示操作成功的 Token 序列
       colorWarning: '#FFC100', // 用于表示操作警告的 Token 序列
       colorInfo: '', // 用于表示操作信息的 Token 序列
@@ -25,17 +26,15 @@ const defaultProps: DefaultConfigProps = {
       fontSize: 14,
     },
     header: {
-      colorBgHeader: '#217BA0',
-      colorHeaderTitle: '#FFFFFF',
+      colorBgHeader: '#FFFFFF',
+      colorHeaderTitle: '#00b96b',
+      heightLayoutHeader: 64,
       colorBgMenuItemHover: '#217BA0',
       colorBgMenuItemSelected: '#46A0C0',
       colorTextMenuSelected: '#FFFFFF',
       colorTextMenuActive: '#FFFFFF',
       colorTextMenu: '#FFFFFF',
       colorTextMenuSecondary: '#FFFFFF',
-      colorBgRightActionsItemHover: '#217BA0',
-      colorTextRightActionsItem: '#FFFFFF',
-      heightLayoutHeader: 64,
     },
     sider: {
       colorMenuBackground: '#FFFFFF', // 背景色
@@ -46,8 +45,10 @@ const defaultProps: DefaultConfigProps = {
       colorTextMenuItemHover: '#217BA0', // 鼠标经过的字体颜色
       colorTextMenuActive: '#217BA0', //
       colorTextMenu: 'rgba(0,0,0,0.65)', // 字体颜色
-      paddingInlineLayoutMenu: 8,
-      paddingBlockLayoutMenu: 8,
+      marginLayoutMenu: 12,
+      paddingLayoutMenu: 4,
+      borderRadiusMenu: 8,
+      overflow: 'hidden',
     },
     pageContainer: {
       paddingInlinePageContainerContent: 12,

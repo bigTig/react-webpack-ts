@@ -3,6 +3,7 @@
 .basic-layout {
   width: 100%;
   height: 100%;
+  background-color: @body-background;
 
   .basic-layout-header {
     display: flex;
@@ -19,11 +20,16 @@
       display: flex;
       align-items: center;
       padding: 0 14px;
+
+      :global(.ant-menu-horizontal) {
+        background: transparent;
+        border: 0;
+      }
     }
   }
 
-  .basic-layout-header-light {
-    background-color: #fff;
+  :global(.ant-layout) {
+    background-color: @body-background;
   }
 
   .basic-layout-container {
@@ -55,5 +61,7 @@
 
   :global(.ant-menu) {
     height: 100%;
+    background-color: transparent !important;
+    border-inline-end: 0 !important;
   }
 }

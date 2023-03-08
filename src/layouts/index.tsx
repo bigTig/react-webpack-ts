@@ -1,7 +1,8 @@
-import defaultProps from '@/config/defaultProps'
+import { systemConfigAtom } from '@/store/config'
 import { menuAtom } from '@/store/menus'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
-import { Layout } from 'antd'
+import { useEmotionCss } from '@ant-design/use-emotion-css'
+import { Layout, theme } from 'antd'
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -14,38 +15,53 @@ import styles from './index.less'
 
 const { Header, Content, Sider } = Layout
 
+const { useToken } = theme
+
 const BasicLayout: React.FC = () => {
+  const { token } = useToken()
   const [collapsed, setCollapsed] = useState(false)
   const menuRouterState = useRecoilValue(menuAtom)
+  const systemConfigState = useRecoilValue(systemConfigAtom)
+
+  const { sider, pageContainer } = systemConfigState.token
+  const { layout, navTheme, siderWidth, breadcrumb } = systemConfigState
+
+  const basicSiderClassName = useEmotionCss(({ token }) => {
+    return {
+      margin: sider?.marginLayoutMenu,
+      marginRight: 0,
+      borderRadius: sider?.borderRadiusMenu,
+      padding: sider?.paddingLayoutMenu,
+      overflow: sider?.overflow,
+      color: token.colorPrimary,
+    }
+  })
 
   return (
     <Layout className={styles['basic-layout']}>
-      <Header
-        className={`${styles['basic-layout-header']} ${
-          defaultProps.navTheme === 'light' ? styles['basic-layout-header-light'] : ''
-        }`}
-      >
+      <Header className={`${styles['basic-layout-header']}`}>
         {/* logo */}
         <LogoBasic />
         <div className={styles['basic-layout-header-right']}>
-          {defaultProps.layout === 'mix' ? <BasicHeaderMenu /> : null}
+          {layout === 'mix' ? <BasicHeaderMenu /> : null}
           <RightContent />
         </div>
       </Header>
       <Layout>
-        {menuRouterState.length || defaultProps.layout === 'side' ? (
+        {menuRouterState.length || layout === 'side' ? (
           <Sider
-            className={styles['basic-sider']}
+            className={`${styles['basic-sider']} ${layout === 'mix' && basicSiderClassName}`}
             trigger={null}
-            theme={defaultProps.navTheme}
+            theme={navTheme}
             collapsed={collapsed}
-            width={defaultProps.siderWidth}
+            width={siderWidth}
           >
             <BasicSider isCollapse={collapsed} />
 
             <div
               className={styles['basic-sider-collapsed']}
               onClick={() => setCollapsed(!collapsed)}
+              style={{ color: token.colorPrimary }}
             >
               {!collapsed ? (
                 <MenuFoldOutlined style={{ fontSize: 18 }} />
@@ -56,13 +72,11 @@ const BasicLayout: React.FC = () => {
           </Sider>
         ) : null}
         <Layout className={styles['basic-layout-container']}>
-          {defaultProps.breadcrumb ? <BasicBreadcrumb /> : null}
+          {breadcrumb ? <BasicBreadcrumb /> : null}
           <Content
             style={{
-              padding: defaultProps.token?.pageContainer?.paddingInlinePageContainerContent,
-              paddingTop: defaultProps.breadcrumb
-                ? 0
-                : defaultProps.token?.pageContainer?.paddingInlinePageContainerContent,
+              padding: pageContainer?.paddingInlinePageContainerContent,
+              paddingTop: breadcrumb ? 0 : pageContainer?.paddingInlinePageContainerContent,
             }}
           >
             <Outlet></Outlet>

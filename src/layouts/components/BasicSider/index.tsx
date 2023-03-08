@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import defaultProps from '@/config/defaultProps'
 import { routerArray } from '@/routers'
 import { deepLoopFloat } from '@/routers/utils/useRouter'
 import { breadcrumbAtom } from '@/store/breadcrumb'
+import { systemConfigAtom } from '@/store/config'
 import { menuAtom } from '@/store/menus'
 import { findAllBreadcrumb, getOpenKeys, searchRoute } from '@/utils'
 import { Menu, MenuProps } from 'antd'
@@ -27,10 +27,13 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const { isCollapse } = props
   const { pathname } = useLocation()
   const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
+  const systemConfigState = useRecoilValue(systemConfigAtom)
   const menuRouterState = useRecoilValue(menuAtom)
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [menuList, setMenuList] = useState<MenuItem[]>([])
+
+  const { layout, navTheme } = systemConfigState
 
   // 刷新页面菜单保持高亮
   useEffect(() => {
@@ -54,17 +57,16 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   }
 
   useEffect(() => {
-    console.log(routerArray)
-    defaultProps.layout === 'side'
+    layout === 'side'
       ? setMenuList(deepLoopFloat(routerArray))
       : setMenuList(deepLoopFloat(menuRouterState))
 
     setBreadcrumbAtom(findAllBreadcrumb(routerArray))
-  }, [menuRouterState, setBreadcrumbAtom])
+  }, [menuRouterState, setBreadcrumbAtom, layout])
 
   return (
     <Menu
-      theme={defaultProps.navTheme}
+      theme={navTheme}
       mode='inline'
       triggerSubMenuAction='click'
       openKeys={openKeys}

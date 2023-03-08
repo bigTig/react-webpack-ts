@@ -1,10 +1,10 @@
-import { ConfigProvider, Spin } from 'antd'
+import { Spin } from 'antd'
 import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 import App from './App'
 import './app.less'
-import defaultProps from './config/defaultProps'
 
 const loading = (
   <div style={{ display: 'flex', height: '100vh' }}>
@@ -18,13 +18,9 @@ if (root) {
   createRoot(root).render(
     <Suspense fallback={loading}>
       <BrowserRouter>
-        <ConfigProvider
-          theme={{
-            token: defaultProps.token?.token,
-          }}
-        >
+        <RecoilRoot>
           <App />
-        </ConfigProvider>
+        </RecoilRoot>
       </BrowserRouter>
     </Suspense>,
   )

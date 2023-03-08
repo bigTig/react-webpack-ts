@@ -7,6 +7,11 @@ export interface DefaultConfigProps {
   siderWidth?: number
   breadcrumb?: boolean
   /**
+   * @name theme 是否默认主题
+   * @type  true | false
+   */
+  headerTheme?: boolean
+  /**
    * @name theme for nav menu
    * @type  "light" | "dark" | "realDark"
    */
@@ -22,20 +27,18 @@ export interface DefaultConfigProps {
    */
   layout?: 'side' | 'top' | 'mix'
   logo?: string
-  token?: {
+  token: {
     token?: Partial<AliasToken>
-    header?: {
-      colorBgHeader?: string
-      colorHeaderTitle?: string
+    header: {
+      colorBgHeader?: string // 头部菜单 背景色
+      colorHeaderTitle?: string // 头部菜单 - logo字体颜色
+      heightLayoutHeader: number // 头部菜单 高度
       colorBgMenuItemHover?: string
       colorBgMenuItemSelected?: string
       colorTextMenuSelected?: string
       colorTextMenuActive?: string
       colorTextMenu?: string
       colorTextMenuSecondary?: string
-      colorBgRightActionsItemHover?: string
-      colorTextRightActionsItem?: string
-      heightLayoutHeader?: number
     }
     sider?: {
       colorMenuBackground?: string // 背景色
@@ -46,8 +49,10 @@ export interface DefaultConfigProps {
       colorTextMenuItemHover?: string // 鼠标经过的字体颜色
       colorTextMenuActive?: string //
       colorTextMenu?: string // 字体颜色
-      paddingInlineLayoutMenu?: number
-      paddingBlockLayoutMenu?: number
+      marginLayoutMenu?: number // 左侧菜单 margin min模式下有效
+      paddingLayoutMenu?: number // 左侧菜单 padding min模式下有效
+      borderRadiusMenu?: number // 左侧菜单 borderRadius min模式下有效
+      overflow?: 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' // 左侧菜单 overflow min模式下有效
     }
     // 内容区
     pageContainer?: {

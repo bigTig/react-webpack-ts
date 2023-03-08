@@ -1,8 +1,9 @@
-import defaultProps from '@/config/defaultProps'
+import { systemConfigAtom } from '@/store/config'
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Avatar } from 'antd'
 import React from 'react'
+import { useRecoilValue } from 'recoil'
 import HeaderDropdown from '../HeaderDropdown'
 
 export type GlobalHeaderRightProps = {
@@ -10,6 +11,8 @@ export type GlobalHeaderRightProps = {
 }
 
 const Name = () => {
+  const systemConfigState = useRecoilValue(systemConfigAtom)
+
   const nameClassName = useEmotionCss(({ token }) => {
     return {
       width: '70px',
@@ -18,7 +21,7 @@ const Name = () => {
       lineHeight: '48px',
       whiteSpace: 'nowrap',
       textOverflow: 'ellipsis',
-      color: defaultProps.navTheme === 'light' ? token.colorPrimary : token.colorWhite,
+      color: systemConfigState.navTheme === 'light' ? token.colorPrimary : token.colorWhite,
       [`@media only screen and (max-width: ${token.screenMD}px)`]: {
         display: 'none',
       },
