@@ -20,7 +20,7 @@ export const getOpenKeys = (path: string) => {
 /**
  * @description 递归查询对应的路由
  * @param {String} path 当前访问地址
- * @param {Array} routes 路由列表
+ * @param {Array} routes 所有的路由列表
  * @returns array
  */
 export const searchRoute = (path: string, routes: any[] = []): metaRoutersProps => {

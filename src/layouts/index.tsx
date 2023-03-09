@@ -1,5 +1,5 @@
 import { systemConfigAtom } from '@/store/config'
-import { menuAtom } from '@/store/menus'
+import { currentMenuAtom, menuAtom } from '@/store/menus'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Layout, theme } from 'antd'
@@ -21,6 +21,7 @@ const BasicLayout: React.FC = () => {
   const { token } = useToken()
   const [collapsed, setCollapsed] = useState(false)
   const menuRouterState = useRecoilValue(menuAtom)
+  const currentMenuState = useRecoilValue(currentMenuAtom)
   const systemConfigState = useRecoilValue(systemConfigAtom)
 
   const { sider, pageContainer } = systemConfigState.token
@@ -52,6 +53,7 @@ const BasicLayout: React.FC = () => {
           <Sider
             className={`${styles['basic-sider']} ${layout === 'mix' && basicSiderClassName}`}
             trigger={null}
+            style={{ display: currentMenuState.meta?.hideSide ? 'none' : 'block' }}
             theme={navTheme}
             collapsed={collapsed}
             width={siderWidth}

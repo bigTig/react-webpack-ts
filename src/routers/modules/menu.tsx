@@ -56,6 +56,8 @@ const menuRouter: Array<metaRoutersProps> = [
                 ),
                 meta: {
                   requiresAuth: true,
+                  hideMenu: true,
+                  hideSide: true,
                   title: '菜单2-2-2',
                   key: 'menu222',
                 },
@@ -85,7 +87,6 @@ const menuRouter: Array<metaRoutersProps> = [
         path: '/menu/menu3',
         element: lazyLoad(React.lazy(() => import('@/pages/menu/menu3/index'))),
         meta: {
-          requiresAuth: true,
           title: '菜单3',
           key: 'menu3',
         },

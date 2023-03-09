@@ -8,7 +8,7 @@ export const menuAtom = atom({
 })
 
 /** 当前选中的菜单 */
-export const currentSelectMenuAtom = atom({
-  key: 'selectMenuState',
+export const currentMenuAtom = atom({
+  key: 'currentMenuState',
   default: {} as metaRoutersProps,
 })

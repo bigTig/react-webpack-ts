@@ -4,7 +4,7 @@ import { routerArray } from '@/routers'
 import { deepLoopFloat } from '@/routers/utils/useRouter'
 import { breadcrumbAtom } from '@/store/breadcrumb'
 import { systemConfigAtom } from '@/store/config'
-import { menuAtom } from '@/store/menus'
+import { currentMenuAtom, menuAtom } from '@/store/menus'
 import { findAllBreadcrumb, getOpenKeys, searchRoute } from '@/utils'
 import { Menu, MenuProps } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
@@ -27,6 +27,7 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const { isCollapse } = props
   const { pathname } = useLocation()
   const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
+  const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
   const systemConfigState = useRecoilValue(systemConfigAtom)
   const menuRouterState = useRecoilValue(menuAtom)
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
@@ -39,7 +40,20 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   useEffect(() => {
     setSelectedKeys([pathname])
     isCollapse ? null : setOpenKeys(getOpenKeys(pathname))
-  }, [pathname, isCollapse])
+  }, [pathname, isCollapse, menuList])
+
+  useEffect(() => {
+    setMenuList(deepLoopFloat(layout === 'side' ? routerArray : menuRouterState))
+  }, [menuRouterState, layout])
+
+  useEffect(() => {
+    setBreadcrumbAtom(findAllBreadcrumb(routerArray))
+  }, [setBreadcrumbAtom])
+
+  useEffect(() => {
+    const route = searchRoute(pathname, routerArray)
+    setCurrentMenuAtom(route)
+  }, [pathname, setCurrentMenuAtom])
 
   // 点击当前菜单跳转页面
   const navigate = useNavigate()
@@ -55,14 +69,6 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
     if (latestOpenKey.includes(openKeys[0])) return setOpenKeys(openKeys)
     setOpenKeys([latestOpenKey])
   }
-
-  useEffect(() => {
-    layout === 'side'
-      ? setMenuList(deepLoopFloat(routerArray))
-      : setMenuList(deepLoopFloat(menuRouterState))
-
-    setBreadcrumbAtom(findAllBreadcrumb(routerArray))
-  }, [menuRouterState, setBreadcrumbAtom, layout])
 
   return (
     <Menu

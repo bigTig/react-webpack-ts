@@ -1,8 +1,10 @@
 import { HOME_URL } from '@/config'
 import { breadcrumbAtom } from '@/store/breadcrumb'
-import { Breadcrumb } from 'antd'
+import { currentMenuAtom } from '@/store/menus'
+import { LeftOutlined } from '@ant-design/icons'
+import { Breadcrumb, Button } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import styles from './index.less'
 
@@ -12,7 +14,9 @@ import styles from './index.less'
  */
 const BasicBreadcrumb: React.FC = () => {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const breadcrumbState = useRecoilValue(breadcrumbAtom)
+  const currentMenuState = useRecoilValue(currentMenuAtom)
   const [breadcrumbList, setBreadcrumbList] = useState([])
 
   useEffect(() => {
@@ -21,9 +25,24 @@ const BasicBreadcrumb: React.FC = () => {
     }
   }, [breadcrumbState, pathname])
 
+  const breadcrumbBack = () => {
+    const isHideMenu = currentMenuState.meta?.hideSide
+
+    return isHideMenu ? (
+      <Button
+        style={{ marginRight: 10 }}
+        icon={<LeftOutlined style={{ fontSize: 12 }} />}
+        onClick={() => navigate(-1)}
+      >
+        返回
+      </Button>
+    ) : null
+  }
+
   const itemRender = () => {
     return (
       <>
+        {breadcrumbBack()}
         <Breadcrumb.Item>
           <Link to={`${HOME_URL}`}>首页</Link>
         </Breadcrumb.Item>
