@@ -3,7 +3,8 @@ import { routerArray } from '@/routers'
 import { metaRoutersProps } from '@/routers/interface'
 import { deepLoopFloat, getFirstMenu, getOtherMenu, MenuItem } from '@/routers/utils/useRouter'
 import { systemConfigAtom } from '@/store/config'
-import { menuAtom } from '@/store/menus'
+import { currentMenuAtom, menuAtom } from '@/store/menus'
+import { searchRoute } from '@/utils'
 import { Menu, MenuProps } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -19,6 +20,7 @@ const BasicHeaderMenu: React.FC = () => {
   const navigate = useNavigate()
   const setMenuAtom = useSetRecoilState(menuAtom)
   const systemConfigState = useRecoilValue(systemConfigAtom)
+  const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
 
@@ -53,6 +55,11 @@ const BasicHeaderMenu: React.FC = () => {
       setMenuAtom(router.children as metaRoutersProps[])
     }
   }, [navigate, pathname, setMenuAtom])
+
+  useEffect(() => {
+    const route = searchRoute(pathname, routerArray)
+    setCurrentMenuAtom(route)
+  }, [pathname, setCurrentMenuAtom])
 
   return (
     <Menu

@@ -12,3 +12,9 @@ export const currentMenuAtom = atom({
   key: 'currentMenuState',
   default: {} as metaRoutersProps,
 })
+
+/** 屏幕宽度 */
+export const screenWidthAtom = atom({
+  key: 'screenWidthState',
+  default: document.body.clientWidth,
+})

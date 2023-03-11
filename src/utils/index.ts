@@ -28,7 +28,9 @@ export const searchRoute = (path: string, routes: any[] = []): metaRoutersProps 
     path: '',
   }
   for (const item of routes) {
-    if (item.path === path) return item
+    if (item.path === path) {
+      result = item
+    }
     if (item.children) {
       const res = searchRoute(path, item.children)
       if (Object.keys(res).length) result = res

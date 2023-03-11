@@ -1,11 +1,11 @@
 import { systemConfigAtom } from '@/store/config'
-import { currentMenuAtom, menuAtom } from '@/store/menus'
+import { currentMenuAtom, menuAtom, screenWidthAtom } from '@/store/menus'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Layout, theme } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import BasicBreadcrumb from './components/BasicBreadcrumb'
 import BasicHeaderMenu from './components/BasicHeaderMenu'
 import BasicSider from './components/BasicSider'
@@ -23,6 +23,7 @@ const BasicLayout: React.FC = () => {
   const menuRouterState = useRecoilValue(menuAtom)
   const currentMenuState = useRecoilValue(currentMenuAtom)
   const systemConfigState = useRecoilValue(systemConfigAtom)
+  const [screenWidthState, setScreenWidthAtom] = useRecoilState(screenWidthAtom)
 
   const { sider, pageContainer } = systemConfigState.token
   const { layout, navTheme, siderWidth, breadcrumb } = systemConfigState
@@ -37,6 +38,20 @@ const BasicLayout: React.FC = () => {
       color: token.colorPrimary,
     }
   })
+
+  // 监听窗口大小变化
+  useEffect(() => {
+    window.onresize = () => {
+      return (() => {
+        const SCREENWIDTH = document.body.clientWidth
+        setScreenWidthAtom(SCREENWIDTH)
+      })()
+    }
+  }, [setScreenWidthAtom])
+
+  useEffect(() => {
+    setCollapsed(screenWidthState < 1200)
+  }, [screenWidthState])
 
   return (
     <Layout className={styles['basic-layout']}>

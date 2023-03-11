@@ -4,7 +4,9 @@ export interface DefaultConfigProps {
   location: {
     pathname: string
   }
-  siderWidth?: number
+  /** 侧栏的宽度 */
+  siderWidth: number
+  /** 面包屑 */
   breadcrumb?: boolean
   /**
    * @name theme 是否默认主题
@@ -16,6 +18,7 @@ export interface DefaultConfigProps {
    * @type  "light" | "dark" | "realDark"
    */
   navTheme?: 'dark' | 'light' | undefined
+  /** 项目title */
   title?: string
   /**
    * @name layout 的布局方式
@@ -26,9 +29,12 @@ export interface DefaultConfigProps {
    * @example 混合布局 既有顶部也有侧边 layout="mix"
    */
   layout?: 'side' | 'top' | 'mix'
+  /** logo */
   logo?: string
   token: {
+    /** 重置antd,自定义主题 */
     token?: Partial<AliasToken>
+    /** 自定义header */
     header: {
       colorBgHeader?: string // 头部菜单 背景色
       colorHeaderTitle?: string // 头部菜单 - logo字体颜色
@@ -40,6 +46,7 @@ export interface DefaultConfigProps {
       colorTextMenu?: string
       colorTextMenuSecondary?: string
     }
+    /** 自定义侧栏 */
     sider?: {
       colorMenuBackground?: string // 背景色
       colorBgMenuItemCollapsedHover?: string
@@ -54,12 +61,13 @@ export interface DefaultConfigProps {
       borderRadiusMenu?: number // 左侧菜单 borderRadius min模式下有效
       overflow?: 'visible' | 'hidden' | 'clip' | 'scroll' | 'auto' // 左侧菜单 overflow min模式下有效
     }
-    // 内容区
+    /** 内容区 */
     pageContainer?: {
       paddingInlinePageContainerContent?: number
       paddingBlockPageContainerContent?: number
     }
   }
+  /** 内容区背景图 */
   bgLayoutImgList?: {
     src?: string
     top?: number
