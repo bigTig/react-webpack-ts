@@ -3,6 +3,7 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Avatar } from 'antd'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import HeaderDropdown from '../HeaderDropdown'
 
@@ -55,6 +56,8 @@ const AvatarLogo = () => {
 }
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
+  const navigate = useNavigate()
+
   /**
    * 退出登录，并且将当前的 url 保存
    */
@@ -97,6 +100,9 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
       key: 'logout',
       icon: <LogoutOutlined />,
       label: '退出登录',
+      onClick: () => {
+        navigate('/login')
+      },
     },
   ]
 

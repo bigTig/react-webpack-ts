@@ -1,0 +1,48 @@
+@import url('@/styles/variable.less');
+
+.login-form {
+  padding-top: 32px;
+
+  :global {
+    .ant-form-item-control-input-content {
+      position: relative;
+    }
+  }
+
+  .placeholder-label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    z-index: 0;
+    transform: translateY(-50%);
+
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      z-index: -2;
+      padding: 0 4px;
+      cursor: text;
+      background-color: #fff;
+      content: attr(data-placeholder);
+      transform: translateY(-50%);
+      transition: .5s;
+    }
+  }
+
+  .remember-forgot {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .placeholder-focus {
+    &::after {
+      top: -22px;
+      color: @primary-color;
+    }
+  }
+
+  .ant-form-item-none-margin {
+    margin-bottom: 0;
+  }
+}
