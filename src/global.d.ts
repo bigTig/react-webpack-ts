@@ -8,6 +8,8 @@ export interface DefaultConfigProps {
   siderWidth: number
   /** 面包屑 */
   breadcrumb?: boolean
+  /** 页脚 */
+  footer?: boolean
   /**
    * @name theme 是否默认主题
    * @type  true | false

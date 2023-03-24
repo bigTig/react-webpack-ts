@@ -36,7 +36,7 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [menuList, setMenuList] = useState<MenuItem[]>([])
 
-  const { layout, navTheme } = systemConfigState
+  const { layout, navTheme, breadcrumb } = systemConfigState
 
   /** 刷新页面菜单保持高亮 */
   useEffect(() => {
@@ -51,8 +51,8 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
 
   /** 构造面包屑数据 */
   useEffect(() => {
-    setBreadcrumbAtom(findAllBreadcrumb(routerArray))
-  }, [setBreadcrumbAtom])
+    breadcrumb && setBreadcrumbAtom(findAllBreadcrumb(routerArray))
+  }, [breadcrumb, setBreadcrumbAtom])
 
   /** 刷新后根据地址栏获取当前路由 */
   useEffect(() => {

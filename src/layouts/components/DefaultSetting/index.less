@@ -37,7 +37,6 @@
       z-index: 1;
       width: 33%;
       height: 100%;
-      background-color: @dark-color;
       content: '';
     }
 
@@ -47,12 +46,15 @@
       left: 0;
       width: 100%;
       height: 25%;
-      background-color: @white;
       content: '';
     }
 
     &-light {
       &::before {
+        background-color: @white;
+      }
+
+      &::after {
         background-color: @white;
       }
     }
@@ -64,6 +66,16 @@
 
       &::after {
         background-color: @white;
+      }
+    }
+
+    &-top {
+      &::before {
+        display: none;
+      }
+
+      &::after {
+        background-color: @dark-color;
       }
     }
 
@@ -114,5 +126,16 @@
     text-align: center;
     cursor: pointer;
     border-radius: 2px;
+  }
+}
+
+.container-setting {
+  display: flex;
+  flex-direction: column;
+
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }

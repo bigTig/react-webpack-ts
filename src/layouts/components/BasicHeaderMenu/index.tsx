@@ -24,35 +24,39 @@ const BasicHeaderMenu: React.FC = () => {
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
 
-  const { navTheme } = systemConfigState
+  const { navTheme, layout } = systemConfigState
 
   // 点击当前菜单跳转页面
   const clickMenu: MenuProps['onClick'] = ({ key }: { key: string }) => {
     setSelectedKeys([key])
-    const router: metaRoutersProps = getOtherMenu(routerArray, key)
-    if (router.single && router.children) {
-      navigate(router.children[0].path)
-      setMenuAtom([])
+    if (layout === 'top') {
+      navigate(key)
     } else {
-      const path: any = router.children && router.children[0].path
-      navigate(path)
-      setMenuAtom(router.children as metaRoutersProps[])
+      const router: metaRoutersProps = getOtherMenu(routerArray, key)
+      if (router?.single && router?.children) {
+        navigate(router.children[0].path)
+        setMenuAtom([])
+      } else {
+        const path: any = router.children && router.children[0].path
+        navigate(path)
+        setMenuAtom(router.children as metaRoutersProps[])
+      }
     }
   }
 
   useEffect(() => {
-    setMenuList(deepLoopFloat(getFirstMenu(routerArray)))
-  }, [])
+    setMenuList(deepLoopFloat(layout === 'mix' ? getFirstMenu(routerArray) : routerArray))
+  }, [layout])
 
   useEffect(() => {
     const path = `/${pathname.split('/')[1]}`
     setSelectedKeys([path])
     const router = getOtherMenu(routerArray, path)
-    if (router.single && router.children) {
-      navigate(router.children[0].path)
+    if (router?.single && router?.children) {
+      navigate(router?.children[0].path)
       setMenuAtom([])
     } else {
-      setMenuAtom(router.children as metaRoutersProps[])
+      setMenuAtom(router?.children as metaRoutersProps[])
     }
   }, [navigate, pathname, setMenuAtom])
 

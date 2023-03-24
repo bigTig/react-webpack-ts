@@ -65,12 +65,12 @@ const BasicLayout: React.FC = () => {
         {/* logo */}
         <LogoBasic />
         <div className={styles['basic-layout-header-right']}>
-          {layout === 'mix' ? <BasicHeaderMenu /> : null}
+          {layout === 'mix' || layout === 'top' ? <BasicHeaderMenu /> : null}
           <RightContent />
         </div>
       </Header>
       <Layout>
-        {menuRouterState.length || layout === 'side' ? (
+        {(menuRouterState.length || layout === 'side') && layout !== 'top' ? (
           <Sider
             className={`${styles['basic-sider']} ${layout === 'mix' && basicSiderClassName}`}
             trigger={null}

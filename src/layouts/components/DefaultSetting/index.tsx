@@ -9,7 +9,7 @@ import {
   SoundOutlined,
 } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
-import { Alert, Button, Divider, Drawer, FloatButton, message, Space } from 'antd'
+import { Alert, Button, Divider, Drawer, FloatButton, message, Space, Switch, Tooltip } from 'antd'
 import classNames from 'classnames'
 import copy from 'copy-to-clipboard'
 import React, { useState } from 'react'
@@ -17,24 +17,25 @@ import { useRecoilState } from 'recoil'
 import styles from './index.less'
 
 const Style = [
-  { label: 'light', value: 'light' },
-  { label: 'dark', value: 'dark' },
+  { label: '亮色菜单风格', value: 'light' },
+  { label: '暗色菜单风格', value: 'dark' },
 ]
 const Sider = [
-  { label: 'light', value: 'side' },
-  { label: 'dark', value: 'mix' },
+  { label: '侧边菜单布局', value: 'side' },
+  { label: '顶部菜单布局', value: 'mix' },
+  { label: '混合菜单布局', value: 'top' },
 ]
 const Primary = [
-  { label: 'light', value: '#00b96b' },
-  { label: 'dark', value: '#1890ff' },
-  { label: 'dark', value: '#722ed1' },
-  { label: 'dark', value: '#faad14' },
+  { label: '极光绿（默认）', value: '#00b96b' },
+  { label: '拂晓蓝', value: '#1890ff' },
+  { label: '酱紫', value: '#722ed1' },
+  { label: '日暮', value: '#faad14' },
 ]
 
 /** 默认设置 - 主题-整体风格设置 */
 const DefaultSetting: React.FC = () => {
   const [systemConfigState, setSystemConfigAtom] = useRecoilState(systemConfigAtom)
-  const [drawerOpen, setDrawerOpen] = useState(true)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
   const settingDrawerBlockItemCheckbox = useEmotionCss(({ token }) => {
     return {
@@ -69,17 +70,18 @@ const DefaultSetting: React.FC = () => {
             </Divider>
             <div className={styles['setting-drawer-block']}>
               {Style.map((el: any) => (
-                <div
-                  key={el.value}
-                  className={classNames(
-                    styles['setting-drawer-block-item'],
-                    systemConfigState.navTheme === el.value && settingDrawerBlockItemCheckbox,
-                    styles[`setting-drawer-block-item-${el}`],
-                  )}
-                  onClick={() => {
-                    setSystemConfigAtom({ ...systemConfigState, navTheme: el.value })
-                  }}
-                />
+                <Tooltip title={el.label} key={el.value}>
+                  <div
+                    className={classNames(
+                      styles['setting-drawer-block-item'],
+                      systemConfigState.navTheme === el.value && settingDrawerBlockItemCheckbox,
+                      styles[`setting-drawer-block-item-${el.value}`],
+                    )}
+                    onClick={() => {
+                      setSystemConfigAtom({ ...systemConfigState, navTheme: el.value })
+                    }}
+                  />
+                </Tooltip>
               ))}
             </div>
             <Divider orientation='left' orientationMargin='0'>
@@ -87,27 +89,28 @@ const DefaultSetting: React.FC = () => {
             </Divider>
             <div className={styles['theme-color']}>
               {Primary.map(el => (
-                <div
-                  key={el.value}
-                  className={styles['theme-color-block']}
-                  style={{ backgroundColor: el.value }}
-                  onClick={() =>
-                    setSystemConfigAtom({
-                      ...systemConfigState,
-                      token: {
-                        ...systemConfigState.token,
+                <Tooltip title={el.label} key={el.value}>
+                  <div
+                    className={styles['theme-color-block']}
+                    style={{ backgroundColor: el.value }}
+                    onClick={() =>
+                      setSystemConfigAtom({
+                        ...systemConfigState,
                         token: {
-                          ...systemConfigState.token.token,
-                          colorPrimary: el.value,
+                          ...systemConfigState.token,
+                          token: {
+                            ...systemConfigState.token.token,
+                            colorPrimary: el.value,
+                          },
                         },
-                      },
-                    })
-                  }
-                >
-                  {systemConfigState.token.token?.colorPrimary === el.value ? (
-                    <CheckOutlined />
-                  ) : null}
-                </div>
+                      })
+                    }
+                  >
+                    {systemConfigState.token.token?.colorPrimary === el.value ? (
+                      <CheckOutlined />
+                    ) : null}
+                  </div>
+                </Tooltip>
               ))}
             </div>
             <Divider orientation='left' orientationMargin='0'>
@@ -115,19 +118,45 @@ const DefaultSetting: React.FC = () => {
             </Divider>
             <div className={styles['setting-drawer-block']}>
               {Sider.map((el: any) => (
-                <div
-                  key={el.value}
-                  className={classNames(
-                    styles['setting-drawer-block-item'],
-                    systemConfigState.layout === el.value && settingDrawerBlockItemCheckbox,
-                    styles[`setting-drawer-block-item-${el}`],
-                  )}
-                  onClick={() => {
-                    setSystemConfigAtom({ ...systemConfigState, layout: el.value })
-                  }}
-                />
+                <Tooltip title={el.label} key={el.value}>
+                  <div
+                    className={classNames(
+                      styles['setting-drawer-block-item'],
+                      systemConfigState.layout === el.value && settingDrawerBlockItemCheckbox,
+                      styles[`setting-drawer-block-item-${el.value}`],
+                    )}
+                    onClick={() => {
+                      setSystemConfigAtom({ ...systemConfigState, layout: el.value })
+                    }}
+                  />
+                </Tooltip>
               ))}
             </div>
+            <Divider orientation='left' orientationMargin='0'>
+              内容区域
+            </Divider>
+            <ul className={styles['container-setting']}>
+              <Space direction='vertical' size='middle'>
+                <li className={styles['container-setting-item']}>
+                  <span>面包屑</span>
+                  <Switch
+                    defaultChecked
+                    size='small'
+                    checked={systemConfigState.breadcrumb}
+                    onChange={e => setSystemConfigAtom({ ...systemConfigState, breadcrumb: e })}
+                  />
+                </li>
+                <li className={styles['container-setting-item']}>
+                  <span>页脚</span>
+                  <Switch
+                    defaultChecked
+                    size='small'
+                    checked={systemConfigState.footer}
+                    onChange={e => setSystemConfigAtom({ ...systemConfigState, footer: e })}
+                  />
+                </li>
+              </Space>
+            </ul>
           </div>
           <Space direction='vertical' size='large'>
             <Alert
