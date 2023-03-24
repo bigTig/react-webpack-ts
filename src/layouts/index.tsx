@@ -3,12 +3,14 @@ import { currentMenuAtom, menuAtom, screenWidthAtom } from '@/store/menus'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Layout, theme } from 'antd'
+import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import BasicBreadcrumb from './components/BasicBreadcrumb'
 import BasicHeaderMenu from './components/BasicHeaderMenu'
 import BasicSider from './components/BasicSider'
+import DefaultSetting from './components/DefaultSetting'
 import LogoBasic from './components/Logo'
 import RightContent from './components/RightContent'
 import styles from './index.less'
@@ -33,7 +35,6 @@ const BasicLayout: React.FC = () => {
       margin: sider?.marginLayoutMenu,
       marginRight: 0,
       borderRadius: sider?.borderRadiusMenu,
-      padding: sider?.paddingLayoutMenu,
       overflow: sider?.overflow,
       color: token.colorPrimary,
     }
@@ -55,7 +56,12 @@ const BasicLayout: React.FC = () => {
 
   return (
     <Layout className={styles['basic-layout']}>
-      <Header className={`${styles['basic-layout-header']}`}>
+      <Header
+        className={classNames(
+          styles['basic-layout-header'],
+          navTheme === 'dark' && styles['basic-layout-header-dark'],
+        )}
+      >
         {/* logo */}
         <LogoBasic />
         <div className={styles['basic-layout-header-right']}>
@@ -97,6 +103,8 @@ const BasicLayout: React.FC = () => {
             }}
           >
             <Outlet></Outlet>
+            {/* 悬浮按钮 */}
+            <DefaultSetting />
           </Content>
         </Layout>
       </Layout>

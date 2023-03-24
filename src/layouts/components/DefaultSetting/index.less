@@ -1,0 +1,118 @@
+@import url('@/styles/variable.less');
+
+.setting-container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .close-icon {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    cursor: pointer;
+  }
+}
+
+.setting-drawer-block {
+  display: flex;
+  min-height: 42px;
+
+  &-item {
+    position: relative;
+    width: 44px;
+    height: 36px;
+    margin-right: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: @body-background;
+    border-radius: 4px;
+    box-shadow: 0 1px 2.5px 0 rgba(0, 0, 0, 18%);
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 33%;
+      height: 100%;
+      background-color: @dark-color;
+      content: '';
+    }
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 25%;
+      background-color: @white;
+      content: '';
+    }
+
+    &-light {
+      &::before {
+        background-color: @white;
+      }
+    }
+
+    &-dark {
+      &::before {
+        background-color: @dark-color;
+      }
+
+      &::after {
+        background-color: @white;
+      }
+    }
+
+    &-realDark {
+      background-color: rgba(15, 28, 41, 85%);
+
+      &::before {
+        background-color: rgba(15, 28, 41, 65%);
+      }
+
+      &::after {
+        background-color: rgba(15, 28, 41, 85%);
+      }
+    }
+
+    &-side {
+      &::before {
+        background-color: @dark-color;
+      }
+
+      &::after {
+        background-color: @white;
+      }
+    }
+
+    &-mix {
+      &::before {
+        background-color: @dark-color;
+      }
+
+      &::after {
+        background-color: @dark-color;
+      }
+    }
+  }
+}
+
+.theme-color {
+  display: flex;
+
+  &-block {
+    width: 20px;
+    height: 20px;
+    margin-top: 8px;
+    margin-right: 8px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+}

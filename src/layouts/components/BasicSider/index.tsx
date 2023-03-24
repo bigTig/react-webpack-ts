@@ -6,8 +6,10 @@ import { breadcrumbAtom } from '@/store/breadcrumb'
 import { systemConfigAtom } from '@/store/config'
 import { currentMenuAtom, menuAtom } from '@/store/menus'
 import { findAllBreadcrumb, getOpenKeys, searchRoute } from '@/utils'
+import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Menu, MenuProps } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
+import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
@@ -74,6 +76,13 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
     setOpenKeys([latestOpenKey])
   }
 
+  const { sider } = systemConfigState.token
+  const basicSiderClassName = useEmotionCss(() => {
+    return {
+      padding: sider?.paddingLayoutMenu,
+    }
+  })
+
   return (
     <Menu
       theme={navTheme}
@@ -84,6 +93,7 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
       items={menuList}
       onClick={clickMenu}
       onOpenChange={onOpenChange}
+      className={classNames(basicSiderClassName)}
     />
   )
 }
