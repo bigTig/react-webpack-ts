@@ -26,9 +26,13 @@ const AccountForm: React.FC = () => {
     }
   })
 
-  const handleOnFinish = (values: any) => {
+  const handleOnFinish = async (values: any) => {
     console.log('Success:', values)
-    navigate('/dashboard/dataVisualize')
+    try {
+      navigate('/dashboard/dataVisualize')
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const handleOnFinishFailed = (errorInfo: any) => {
