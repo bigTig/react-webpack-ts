@@ -9,7 +9,7 @@ import { Layout, theme } from 'antd'
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import BasicBreadcrumb from './components/BasicBreadcrumb'
 import BasicHeaderMenu from './components/BasicHeaderMenu'
 import BasicSider from './components/BasicSider'
@@ -28,7 +28,7 @@ const BasicLayout: React.FC = () => {
   const menuRouterState = useRecoilValue(menuAtom)
   const currentMenuState = useRecoilValue(currentMenuAtom)
   const systemConfigState = useRecoilValue(systemConfigAtom)
-  const [screenWidthState, setScreenWidthAtom] = useRecoilState(screenWidthAtom)
+  const screenWidthState = useRecoilValue(screenWidthAtom)
   const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
 
   const { sider, pageContainer } = systemConfigState.token
@@ -43,16 +43,6 @@ const BasicLayout: React.FC = () => {
       color: token.colorPrimary,
     }
   })
-
-  /** 监听窗口大小变化 */
-  useEffect(() => {
-    window.onresize = () => {
-      return (() => {
-        const SCREENWIDTH = document.body.clientWidth
-        setScreenWidthAtom(SCREENWIDTH)
-      })()
-    }
-  }, [setScreenWidthAtom])
 
   useEffect(() => {
     setCollapsed(screenWidthState < 1200)
