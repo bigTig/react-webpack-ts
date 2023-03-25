@@ -25,6 +25,7 @@ const BasicBreadcrumb: React.FC = () => {
     }
   }, [breadcrumbState, pathname])
 
+  /** 面包屑返回按钮 */
   const breadcrumbBack = () => {
     const isHideMenu = currentMenuState.meta?.hideSide
 

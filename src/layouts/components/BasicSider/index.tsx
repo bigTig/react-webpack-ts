@@ -2,10 +2,9 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { routerArray } from '@/routers'
 import { deepLoopFloat } from '@/routers/utils/useRouter'
-import { breadcrumbAtom } from '@/store/breadcrumb'
 import { systemConfigAtom } from '@/store/config'
 import { currentMenuAtom, menuAtom } from '@/store/menus'
-import { findAllBreadcrumb, getOpenKeys, searchRoute } from '@/utils'
+import { getOpenKeys, searchRoute } from '@/utils'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Menu, MenuProps } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
@@ -28,7 +27,6 @@ type MenuItem = Required<MenuProps>['items'][number]
 const BasicSider: React.FC<BasicSiderProps> = props => {
   const { isCollapse } = props
   const { pathname } = useLocation()
-  const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
   const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
   const systemConfigState = useRecoilValue(systemConfigAtom)
   const menuRouterState = useRecoilValue(menuAtom)
@@ -36,7 +34,7 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [menuList, setMenuList] = useState<MenuItem[]>([])
 
-  const { layout, navTheme, breadcrumb } = systemConfigState
+  const { layout, navTheme } = systemConfigState
 
   /** 刷新页面菜单保持高亮 */
   useEffect(() => {
@@ -48,11 +46,6 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   useEffect(() => {
     setMenuList(deepLoopFloat(layout === 'side' ? routerArray : menuRouterState))
   }, [menuRouterState, layout])
-
-  /** 构造面包屑数据 */
-  useEffect(() => {
-    breadcrumb && setBreadcrumbAtom(findAllBreadcrumb(routerArray))
-  }, [breadcrumb, setBreadcrumbAtom])
 
   /** 刷新后根据地址栏获取当前路由 */
   useEffect(() => {

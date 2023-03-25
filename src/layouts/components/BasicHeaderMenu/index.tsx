@@ -26,7 +26,7 @@ const BasicHeaderMenu: React.FC = () => {
 
   const { navTheme, layout } = systemConfigState
 
-  // 点击当前菜单跳转页面
+  /** 点击当前菜单跳转页面 */
   const clickMenu: MenuProps['onClick'] = ({ key }: { key: string }) => {
     setSelectedKeys([key])
     if (layout === 'top') {
@@ -50,7 +50,7 @@ const BasicHeaderMenu: React.FC = () => {
 
   useEffect(() => {
     const path = `/${pathname.split('/')[1]}`
-    setSelectedKeys([path])
+    setSelectedKeys([layout !== 'top' ? path : pathname])
     const router = getOtherMenu(routerArray, path)
     if (router?.single && router?.children) {
       navigate(router?.children[0].path)
@@ -58,7 +58,7 @@ const BasicHeaderMenu: React.FC = () => {
     } else {
       setMenuAtom(router?.children as metaRoutersProps[])
     }
-  }, [navigate, pathname, setMenuAtom])
+  }, [layout, navigate, pathname, setMenuAtom])
 
   useEffect(() => {
     const route = searchRoute(pathname, routerArray)
