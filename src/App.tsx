@@ -2,19 +2,19 @@ import { ConfigProvider } from 'antd'
 import React, { useEffect } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Router from './routers'
-import { systemConfigAtom, systemTypeAtom } from './store/config'
-import { screenWidthAtom } from './store/menus'
+import AuthRouter from './routers/utils/authRouter'
+import { globalScreenWidthAtom, globalSystemConfigAtom, globalSystemTypeAtom } from './store/global'
 import { validateIsMobile } from './utils/validate'
 
 const App = () => {
-  const systemConfigState = useRecoilValue(systemConfigAtom)
-  const setSystemTypeAtom = useSetRecoilState(systemTypeAtom)
-  const setScreenWidthAtom = useSetRecoilState(screenWidthAtom)
-  const { token, header } = systemConfigState.token
+  const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
+  const setGlobalSSystemTypeAtom = useSetRecoilState(globalSystemTypeAtom)
+  const setGlobalSScreenWidthAtom = useSetRecoilState(globalScreenWidthAtom)
+  const { token, header } = globalSystemConfigState.token
 
   useEffect(() => {
-    setSystemTypeAtom(validateIsMobile() ? 1 : 0)
-  }, [setSystemTypeAtom])
+    setGlobalSSystemTypeAtom(validateIsMobile() ? 1 : 0)
+  }, [setGlobalSSystemTypeAtom])
 
   /** 监听窗口大小变化 */
   useEffect(() => {
@@ -22,18 +22,18 @@ const App = () => {
       return (() => {
         const SCREENWIDTH = document.body.clientWidth
         if (SCREENWIDTH >= 1200) {
-          setSystemTypeAtom(0)
+          setGlobalSSystemTypeAtom(0)
         }
         if (SCREENWIDTH < 1200 && SCREENWIDTH >= 800) {
-          setSystemTypeAtom(1)
+          setGlobalSSystemTypeAtom(1)
         }
         if (SCREENWIDTH >= 375 && SCREENWIDTH < 800) {
-          setSystemTypeAtom(2)
+          setGlobalSSystemTypeAtom(2)
         }
-        setScreenWidthAtom(SCREENWIDTH)
+        setGlobalSScreenWidthAtom(SCREENWIDTH)
       })()
     }
-  }, [setScreenWidthAtom, setSystemTypeAtom])
+  }, [setGlobalSScreenWidthAtom, setGlobalSSystemTypeAtom])
 
   return (
     <ConfigProvider
@@ -46,7 +46,9 @@ const App = () => {
         },
       }}
     >
-      <Router />
+      <AuthRouter>
+        <Router />
+      </AuthRouter>
     </ConfigProvider>
   )
 }

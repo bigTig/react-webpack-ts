@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { globalTokenAtom } from '@/store/global'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Button, Checkbox, Form, Input, InputRef, Space, theme } from 'antd'
 import { FormInstance, useForm } from 'antd/es/form/Form'
 import classNames from 'classnames'
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSetRecoilState } from 'recoil'
 import styles from './index.less'
 
 const { useToken } = theme
@@ -14,8 +16,9 @@ const AccountForm: React.FC = () => {
   const { token } = useToken()
   const navigate = useNavigate()
   const usenameRef = useRef<InputRef>(null)
-  const passwordRef = useRef<InputRef>(null)
   const [loginForm] = useForm<FormInstance>()
+  const setGlobalTokenAtom = useSetRecoilState(globalTokenAtom)
+  const passwordRef = useRef<InputRef>(null)
   const [activeType, setActiveType] = useState('')
 
   const placeholderClassName = useEmotionCss(({ token }) => {
@@ -30,6 +33,7 @@ const AccountForm: React.FC = () => {
     console.log('Success:', values)
     try {
       navigate('/dashboard/dataVisualize')
+      setGlobalTokenAtom('token')
     } catch (err) {
       console.log(err)
     }

@@ -1,4 +1,4 @@
-import { systemTypeAtom } from '@/store/config'
+import { globalSystemTypeAtom } from '@/store/global'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { theme } from 'antd'
 import classNames from 'classnames'
@@ -13,19 +13,19 @@ const { useToken } = theme
 
 const Login: React.FC = () => {
   const { token } = useToken()
-  const systemTypeState = useRecoilValue(systemTypeAtom)
+  const globalSystemTypeState = useRecoilValue(globalSystemTypeAtom)
 
   const rightClassName = useEmotionCss(() => {
     const padding = ['110px 75px 100px', '110px 48px 100px', '110px 24px 100px']
     return {
-      padding: padding[systemTypeState],
+      padding: padding[globalSystemTypeState],
     }
   })
 
   const containerClassName = useEmotionCss(() => {
     const margin = ['', '0 75px', '0 16px']
     return {
-      margin: margin[systemTypeState],
+      margin: margin[globalSystemTypeState],
     }
   })
 
@@ -33,11 +33,11 @@ const Login: React.FC = () => {
     <div
       className={styles['login-container']}
       style={{
-        backgroundImage: systemTypeState === 1 ? 'none' : `url(${BGURL})`,
+        backgroundImage: globalSystemTypeState === 1 ? 'none' : `url(${BGURL})`,
       }}
     >
       <div className={classNames(styles.container, containerClassName)}>
-        {systemTypeState === 0 ? <div className={styles['left-container']} /> : null}
+        {globalSystemTypeState === 0 ? <div className={styles['left-container']} /> : null}
         <div className={classNames(styles['right-container'], rightClassName)}>
           <div className={styles.logo} />
           <div className={styles['logo-tip']} style={{ color: token.colorPrimary }}>

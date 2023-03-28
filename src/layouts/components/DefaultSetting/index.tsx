@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { systemConfigAtom } from '@/store/config'
+import { globalSystemConfigAtom } from '@/store/global'
 import {
   BgColorsOutlined,
   CheckOutlined,
@@ -34,7 +34,8 @@ const Primary = [
 
 /** 默认设置 - 主题-整体风格设置 */
 const DefaultSetting: React.FC = () => {
-  const [systemConfigState, setSystemConfigAtom] = useRecoilState(systemConfigAtom)
+  const [globalSystemConfigState, setGlobalSystemConfigAtom] =
+    useRecoilState(globalSystemConfigAtom)
   const [drawerOpen, setDrawerOpen] = useState(false)
 
   const settingDrawerBlockItemCheckbox = useEmotionCss(({ token }) => {
@@ -74,11 +75,12 @@ const DefaultSetting: React.FC = () => {
                   <div
                     className={classNames(
                       styles['setting-drawer-block-item'],
-                      systemConfigState.navTheme === el.value && settingDrawerBlockItemCheckbox,
+                      globalSystemConfigState.navTheme === el.value &&
+                        settingDrawerBlockItemCheckbox,
                       styles[`setting-drawer-block-item-${el.value}`],
                     )}
                     onClick={() => {
-                      setSystemConfigAtom({ ...systemConfigState, navTheme: el.value })
+                      setGlobalSystemConfigAtom({ ...globalSystemConfigState, navTheme: el.value })
                     }}
                   />
                 </Tooltip>
@@ -94,19 +96,19 @@ const DefaultSetting: React.FC = () => {
                     className={styles['theme-color-block']}
                     style={{ backgroundColor: el.value }}
                     onClick={() =>
-                      setSystemConfigAtom({
-                        ...systemConfigState,
+                      setGlobalSystemConfigAtom({
+                        ...globalSystemConfigState,
                         token: {
-                          ...systemConfigState.token,
+                          ...globalSystemConfigState.token,
                           token: {
-                            ...systemConfigState.token.token,
+                            ...globalSystemConfigState.token.token,
                             colorPrimary: el.value,
                           },
                         },
                       })
                     }
                   >
-                    {systemConfigState.token.token?.colorPrimary === el.value ? (
+                    {globalSystemConfigState.token.token?.colorPrimary === el.value ? (
                       <CheckOutlined />
                     ) : null}
                   </div>
@@ -122,11 +124,11 @@ const DefaultSetting: React.FC = () => {
                   <div
                     className={classNames(
                       styles['setting-drawer-block-item'],
-                      systemConfigState.layout === el.value && settingDrawerBlockItemCheckbox,
+                      globalSystemConfigState.layout === el.value && settingDrawerBlockItemCheckbox,
                       styles[`setting-drawer-block-item-${el.value}`],
                     )}
                     onClick={() => {
-                      setSystemConfigAtom({ ...systemConfigState, layout: el.value })
+                      setGlobalSystemConfigAtom({ ...globalSystemConfigState, layout: el.value })
                     }}
                   />
                 </Tooltip>
@@ -142,8 +144,10 @@ const DefaultSetting: React.FC = () => {
                   <Switch
                     defaultChecked
                     size='small'
-                    checked={systemConfigState.breadcrumb}
-                    onChange={e => setSystemConfigAtom({ ...systemConfigState, breadcrumb: e })}
+                    checked={globalSystemConfigState.breadcrumb}
+                    onChange={e =>
+                      setGlobalSystemConfigAtom({ ...globalSystemConfigState, breadcrumb: e })
+                    }
                   />
                 </li>
                 <li className={styles['container-setting-item']}>
@@ -151,8 +155,10 @@ const DefaultSetting: React.FC = () => {
                   <Switch
                     defaultChecked
                     size='small'
-                    checked={systemConfigState.footer}
-                    onChange={e => setSystemConfigAtom({ ...systemConfigState, footer: e })}
+                    checked={globalSystemConfigState.footer}
+                    onChange={e =>
+                      setGlobalSystemConfigAtom({ ...globalSystemConfigState, footer: e })
+                    }
                   />
                 </li>
               </Space>
@@ -169,7 +175,7 @@ const DefaultSetting: React.FC = () => {
               block
               icon={<CopyOutlined />}
               onClick={() => {
-                const flag = copy(JSON.stringify(systemConfigState))
+                const flag = copy(JSON.stringify(globalSystemConfigState))
                 if (flag) {
                   message.success('拷贝成功，请到 src/config/defaultProps.tsx 中替换默认配置')
                 }

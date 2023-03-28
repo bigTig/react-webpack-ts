@@ -1,8 +1,8 @@
 import { routerArray } from '@/routers'
+import { findAllBreadcrumb } from '@/routers/utils'
 import { breadcrumbAtom } from '@/store/breadcrumb'
-import { systemConfigAtom } from '@/store/config'
-import { currentMenuAtom, menuAtom, screenWidthAtom } from '@/store/menus'
-import { findAllBreadcrumb } from '@/utils'
+import { globalScreenWidthAtom, globalSystemConfigAtom } from '@/store/global'
+import { currentMenuAtom, sideMenuAtom } from '@/store/menus'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Layout, theme } from 'antd'
@@ -25,14 +25,14 @@ const { useToken } = theme
 const BasicLayout: React.FC = () => {
   const { token } = useToken()
   const [collapsed, setCollapsed] = useState(false)
-  const menuRouterState = useRecoilValue(menuAtom)
+  const sideMenuState = useRecoilValue(sideMenuAtom)
   const currentMenuState = useRecoilValue(currentMenuAtom)
-  const systemConfigState = useRecoilValue(systemConfigAtom)
-  const screenWidthState = useRecoilValue(screenWidthAtom)
+  const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
+  const globalScreenWidthState = useRecoilValue(globalScreenWidthAtom)
   const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
 
-  const { sider, pageContainer } = systemConfigState.token
-  const { layout, navTheme, siderWidth, breadcrumb } = systemConfigState
+  const { sider, pageContainer } = globalSystemConfigState.token
+  const { layout, navTheme, siderWidth, breadcrumb } = globalSystemConfigState
 
   const basicSiderClassName = useEmotionCss(({ token }) => {
     return {
@@ -45,8 +45,8 @@ const BasicLayout: React.FC = () => {
   })
 
   useEffect(() => {
-    setCollapsed(screenWidthState < 1200)
-  }, [screenWidthState])
+    setCollapsed(globalScreenWidthState < 1200)
+  }, [globalScreenWidthState])
 
   /** 构造面包屑数据 */
   useEffect(() => {
@@ -69,7 +69,7 @@ const BasicLayout: React.FC = () => {
         </div>
       </Header>
       <Layout>
-        {(menuRouterState.length || layout === 'side') && layout !== 'top' ? (
+        {(sideMenuState.length || layout === 'side') && layout !== 'top' ? (
           <Sider
             className={`${styles['basic-sider']} ${layout === 'mix' && basicSiderClassName}`}
             trigger={null}

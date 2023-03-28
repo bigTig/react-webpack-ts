@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { routerArray } from '@/routers'
+import { getOpenKeys, searchRoute } from '@/routers/utils'
 import { deepLoopFloat } from '@/routers/utils/useRouter'
-import { systemConfigAtom } from '@/store/config'
-import { currentMenuAtom, menuAtom } from '@/store/menus'
-import { getOpenKeys, searchRoute } from '@/utils'
+import { globalSystemConfigAtom } from '@/store/global'
+import { currentMenuAtom, sideMenuAtom } from '@/store/menus'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Menu, MenuProps } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
@@ -28,13 +28,13 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const { isCollapse } = props
   const { pathname } = useLocation()
   const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
-  const systemConfigState = useRecoilValue(systemConfigAtom)
-  const menuRouterState = useRecoilValue(menuAtom)
+  const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
+  const sideMenuState = useRecoilValue(sideMenuAtom)
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
   const [openKeys, setOpenKeys] = useState<string[]>([])
   const [menuList, setMenuList] = useState<MenuItem[]>([])
 
-  const { layout, navTheme } = systemConfigState
+  const { layout, navTheme } = globalSystemConfigState
 
   /** 刷新页面菜单保持高亮 */
   useEffect(() => {
@@ -44,8 +44,8 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
 
   /** 根据默认配置获取菜单数据 */
   useEffect(() => {
-    setMenuList(deepLoopFloat(layout === 'side' ? routerArray : menuRouterState))
-  }, [menuRouterState, layout])
+    setMenuList(deepLoopFloat(layout === 'side' ? routerArray : sideMenuState))
+  }, [sideMenuState, layout])
 
   /** 刷新后根据地址栏获取当前路由 */
   useEffect(() => {
@@ -69,7 +69,7 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
     setOpenKeys([latestOpenKey])
   }
 
-  const { sider } = systemConfigState.token
+  const { sider } = globalSystemConfigState.token
   const basicSiderClassName = useEmotionCss(() => {
     return {
       padding: sider?.paddingLayoutMenu,

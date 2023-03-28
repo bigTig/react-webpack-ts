@@ -12,6 +12,7 @@ const dashboardRouter: metaRoutersProps[] = [
       title: 'Dashboard',
       key: 'dashboard',
       icon: 'AreaChartOutlined',
+      auth: true,
     },
     children: [
       {
@@ -20,6 +21,7 @@ const dashboardRouter: metaRoutersProps[] = [
         meta: {
           title: '数据可视化',
           key: 'dataVisualize',
+          auth: true,
         },
       },
       {
@@ -28,6 +30,7 @@ const dashboardRouter: metaRoutersProps[] = [
         meta: {
           title: '内嵌页面',
           key: 'embedded',
+          auth: true,
         },
       },
     ],
