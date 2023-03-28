@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { globalSystemConfigAtom } from '@/store/global'
 import {
+  ApartmentOutlined,
   BgColorsOutlined,
+  CameraOutlined,
   CheckOutlined,
   CloseOutlined,
   CopyOutlined,
+  LayoutOutlined,
   SettingOutlined,
   SoundOutlined,
 } from '@ant-design/icons'
@@ -66,7 +69,8 @@ const DefaultSetting: React.FC = () => {
             <CloseOutlined />
           </div>
           <div>
-            <Divider orientation='left' orientationMargin='0'>
+            <Divider orientation='center' orientationMargin='0'>
+              <LayoutOutlined style={{ marginRight: 5 }} />
               整体风格设置
             </Divider>
             <div className={styles['setting-drawer-block']}>
@@ -86,7 +90,8 @@ const DefaultSetting: React.FC = () => {
                 </Tooltip>
               ))}
             </div>
-            <Divider orientation='left' orientationMargin='0'>
+            <Divider orientation='center' orientationMargin='0'>
+              <BgColorsOutlined style={{ marginRight: 5 }} />
               主题色
             </Divider>
             <div className={styles['theme-color']}>
@@ -115,7 +120,8 @@ const DefaultSetting: React.FC = () => {
                 </Tooltip>
               ))}
             </div>
-            <Divider orientation='left' orientationMargin='0'>
+            <Divider orientation='center' orientationMargin='0'>
+              <ApartmentOutlined style={{ marginRight: 5 }} />
               导航模式
             </Divider>
             <div className={styles['setting-drawer-block']}>
@@ -134,7 +140,8 @@ const DefaultSetting: React.FC = () => {
                 </Tooltip>
               ))}
             </div>
-            <Divider orientation='left' orientationMargin='0'>
+            <Divider orientation='center' orientationMargin='0'>
+              <CameraOutlined style={{ marginRight: 5 }} />
               内容区域
             </Divider>
             <ul className={styles['container-setting']}>

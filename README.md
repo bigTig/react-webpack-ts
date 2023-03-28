@@ -15,7 +15,7 @@
 - 🚀 整个项目集成了 TypeScript 🤣
 - 🚀 使用 recoil 做状态管理，集成 redux-persist 开发
 - 🚀 使用 TypeScript 对 Axios 整个二次封装 （全局错误拦截、常用请求封装、取消重复请求……）
-- 🚀 支持 Antd 组件大小切换、暗黑 && 亮色
+- 🚀 支持 暗黑 && 亮色切换，mix、side、top 菜单模式、不同主题色切换
 - 🚀 使用 自定义高阶组件 进行路由权限拦截（403 页面）
 - 🚀 支持 React-Router v6 路由懒加载配置、菜单手风琴模式、无限级菜单、多标签页、面包屑导航
 - 🚀 使用 Prettier 统一格式化代码，集成 Eslint、Stylelint 代码校验规范（项目规范配置）
