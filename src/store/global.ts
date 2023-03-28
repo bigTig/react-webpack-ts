@@ -1,6 +1,6 @@
 /** 系统公共数据 */
 import defaultProps from '@/config/defaultProps'
-import { DefaultConfigProps } from '@/global'
+import { DefaultConfigProps } from '@/typings/global'
 import { atom } from 'recoil'
 
 /** global - 用户登录的 Token */

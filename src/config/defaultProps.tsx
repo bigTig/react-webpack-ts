@@ -1,4 +1,4 @@
-import { DefaultConfigProps } from '@/global'
+import { DefaultConfigProps } from '@/typings/global'
 
 const tps609606 = require('@/assets/images/common/tps-609-606.png')
 const tps884496 = require('@/assets/images/common/tps-884-496.png')
