@@ -1,5 +1,6 @@
 import { ConfigProvider } from 'antd'
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import Router from './routers'
 import AuthRouter from './routers/utils/authRouter'
@@ -36,20 +37,25 @@ const App = () => {
   }, [setGlobalSScreenWidthAtom, setGlobalSSystemTypeAtom])
 
   return (
-    <ConfigProvider
-      theme={{
-        token: token,
-        components: {
-          Layout: {
-            colorBgHeader: header?.colorBgHeader,
+    <>
+      <Helmet>
+        <title>{globalSystemConfigState.title}</title>
+      </Helmet>
+      <ConfigProvider
+        theme={{
+          token: token,
+          components: {
+            Layout: {
+              colorBgHeader: header?.colorBgHeader,
+            },
           },
-        },
-      }}
-    >
-      <AuthRouter>
-        <Router />
-      </AuthRouter>
-    </ConfigProvider>
+        }}
+      >
+        <AuthRouter>
+          <Router />
+        </AuthRouter>
+      </ConfigProvider>
+    </>
   )
 }
 

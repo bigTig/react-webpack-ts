@@ -30,10 +30,12 @@ const Name = () => {
     }
   })
 
-  return <span className={`${nameClassName} anticon`}>用户名</span>
+  return <span className={`${nameClassName} anticon`}>{globalSystemConfigState.title}</span>
 }
 
 const AvatarLogo = () => {
+  const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
+
   const avatarClassName = useEmotionCss(({ token }) => {
     return {
       marginRight: '8px',
@@ -49,7 +51,7 @@ const AvatarLogo = () => {
     <Avatar
       size='small'
       className={avatarClassName}
-      src='https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg'
+      src={globalSystemConfigState.logo}
       alt='avatar'
     />
   )

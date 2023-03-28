@@ -2,6 +2,7 @@ import { DefaultConfigProps } from '@/global'
 
 const tps609606 = require('@/assets/images/common/tps-609-606.png')
 const tps884496 = require('@/assets/images/common/tps-884-496.png')
+const titleLogo = require('@/assets/images/common/title_logo.svg')
 
 const defaultProps: DefaultConfigProps = {
   location: {
@@ -13,8 +14,8 @@ const defaultProps: DefaultConfigProps = {
   headerTheme: false,
   navTheme: 'light',
   layout: 'top',
-  title: '余友友运营平台',
-  logo: 'https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg',
+  title: '猪猪管家',
+  logo: titleLogo,
   token: {
     token: {
       colorPrimary: '#00b96b', // 品牌色是体现产品特性和传播理念最直观的视觉元素之一
