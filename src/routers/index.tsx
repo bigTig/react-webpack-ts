@@ -23,6 +23,10 @@ export const rootRouter: metaRoutersProps[] = [
   {
     path: '/login',
     element: <Login />,
+    meta: {
+      title: '登录',
+      key: 'login',
+    },
   },
   ...routerArray,
   {

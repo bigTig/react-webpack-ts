@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { routerArray } from '@/routers'
 import { metaRoutersProps } from '@/routers/interface'
-import { searchRoute } from '@/routers/utils'
 import { deepLoopFloat, getFirstMenu, getOtherMenu, MenuItem } from '@/routers/utils/useRouter'
 import { globalSystemConfigAtom } from '@/store/global'
-import { currentMenuAtom, sideMenuAtom } from '@/store/menus'
+import { sideMenuAtom } from '@/store/menus'
 import { Menu, MenuProps } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -20,7 +19,6 @@ const BasicHeaderMenu: React.FC = () => {
   const navigate = useNavigate()
   const setMenuAtom = useSetRecoilState(sideMenuAtom)
   const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
-  const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
   const [menuList, setMenuList] = useState<MenuItem[]>([])
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
 
@@ -61,12 +59,6 @@ const BasicHeaderMenu: React.FC = () => {
       setMenuAtom(router?.children as metaRoutersProps[])
     }
   }, [layout, navigate, pathname, setMenuAtom])
-
-  /** 查找当前选中的路由 */
-  useEffect(() => {
-    const route = searchRoute(pathname, routerArray)
-    setCurrentMenuAtom(route)
-  }, [pathname, setCurrentMenuAtom])
 
   return (
     <Menu

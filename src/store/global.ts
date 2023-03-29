@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /** 系统公共数据 */
 import defaultProps from '@/config/defaultProps'
+import { LocalKeyEnum } from '@/core/enums/localKeyEnum'
+import localStorageEffect from '@/core/storageEffect'
 import { DefaultConfigProps } from '@/typings/global'
 import { atom } from 'recoil'
 
@@ -7,6 +10,7 @@ import { atom } from 'recoil'
 export const globalTokenAtom = atom({
   key: 'globalTokenState',
   default: '',
+  effects_UNSTABLE: [localStorageEffect(LocalKeyEnum.ACCESSTOKEN)],
 })
 
 /** global - 系统配置数据 */
@@ -15,6 +19,7 @@ export const globalSystemConfigAtom = atom({
   default: {
     ...defaultProps,
   } as DefaultConfigProps,
+  effects_UNSTABLE: [localStorageEffect(LocalKeyEnum.SYSTEMCONFIG)],
 })
 
 /** global - 当前在什么系统下访问，0. web端（默认） 1. 移动端 2. 平板 */

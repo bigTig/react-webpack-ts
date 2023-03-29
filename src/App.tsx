@@ -1,14 +1,20 @@
 import { ConfigProvider } from 'antd'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { useLocation } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import Router from './routers'
+import Router, { rootRouter } from './routers'
+import { searchRoute } from './routers/utils'
 import AuthRouter from './routers/utils/authRouter'
 import { globalScreenWidthAtom, globalSystemConfigAtom, globalSystemTypeAtom } from './store/global'
+import { currentMenuAtom } from './store/menus'
 import { validateIsMobile } from './utils/validate'
 
 const App = () => {
+  const { pathname } = useLocation()
   const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
+  const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
+  const currentMenuState = useRecoilValue(currentMenuAtom)
   const setGlobalSSystemTypeAtom = useSetRecoilState(globalSystemTypeAtom)
   const setGlobalSScreenWidthAtom = useSetRecoilState(globalScreenWidthAtom)
   const { token, header } = globalSystemConfigState.token
@@ -16,6 +22,12 @@ const App = () => {
   useEffect(() => {
     setGlobalSSystemTypeAtom(validateIsMobile() ? 1 : 0)
   }, [setGlobalSSystemTypeAtom])
+
+  /** 刷新后根据地址栏获取当前路由 */
+  useEffect(() => {
+    const route = searchRoute(pathname, rootRouter)
+    setCurrentMenuAtom(route)
+  }, [pathname, setCurrentMenuAtom])
 
   /** 监听窗口大小变化 */
   useEffect(() => {
@@ -37,25 +49,25 @@ const App = () => {
   }, [setGlobalSScreenWidthAtom, setGlobalSSystemTypeAtom])
 
   return (
-    <>
-      <Helmet>
-        <title>{globalSystemConfigState.title}</title>
-      </Helmet>
-      <ConfigProvider
-        theme={{
-          token: token,
-          components: {
-            Layout: {
-              colorBgHeader: header?.colorBgHeader,
-            },
+    <ConfigProvider
+      theme={{
+        token: token,
+        components: {
+          Layout: {
+            colorBgHeader: header?.colorBgHeader,
           },
-        }}
-      >
-        <AuthRouter>
-          <Router />
-        </AuthRouter>
-      </ConfigProvider>
-    </>
+        },
+      }}
+    >
+      <Helmet>
+        <title>
+          {currentMenuState?.meta?.title || ''} - {globalSystemConfigState?.title}
+        </title>
+      </Helmet>
+      <AuthRouter>
+        <Router />
+      </AuthRouter>
+    </ConfigProvider>
   )
 }
 

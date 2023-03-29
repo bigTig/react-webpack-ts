@@ -4,14 +4,14 @@ import { routerArray } from '@/routers'
 import { getOpenKeys, searchRoute } from '@/routers/utils'
 import { deepLoopFloat } from '@/routers/utils/useRouter'
 import { globalSystemConfigAtom } from '@/store/global'
-import { currentMenuAtom, sideMenuAtom } from '@/store/menus'
+import { sideMenuAtom } from '@/store/menus'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { Menu, MenuProps } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
 import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 interface BasicSiderProps extends MenuProps {
   isCollapse: boolean
@@ -27,7 +27,6 @@ type MenuItem = Required<MenuProps>['items'][number]
 const BasicSider: React.FC<BasicSiderProps> = props => {
   const { isCollapse } = props
   const { pathname } = useLocation()
-  const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
   const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
   const sideMenuState = useRecoilValue(sideMenuAtom)
   const [selectedKeys, setSelectedKeys] = useState<string[]>([pathname])
@@ -46,12 +45,6 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   useEffect(() => {
     setMenuList(deepLoopFloat(layout === 'side' ? routerArray : sideMenuState))
   }, [sideMenuState, layout])
-
-  /** 刷新后根据地址栏获取当前路由 */
-  useEffect(() => {
-    const route = searchRoute(pathname, routerArray)
-    setCurrentMenuAtom(route)
-  }, [pathname, setCurrentMenuAtom])
 
   /** 点击当前菜单跳转页面 */
   const navigate = useNavigate()
