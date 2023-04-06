@@ -1,3 +1,11 @@
+## 路由权限
+
+### （一）路由权限的设计方案
+> 利用hook封装路由守卫，结合路由权限集，进行匹配拦截
+
+#### 1. 路由守卫的封装
+```tsx
+/** 路由守卫 */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HOME_URL } from '@/config'
 import { AxiosCanceler } from '@/core/http/helper/axiosCancel'
@@ -8,6 +16,7 @@ import { useRecoilValue } from 'recoil'
 import { rootRouter } from '..'
 import { searchRoute } from './'
 
+// 请求取消实例
 const axiosCanceler = new AxiosCanceler()
 
 /** 路由守卫组件 */
@@ -26,6 +35,7 @@ const AuthRouter = (props: { children: any }) => {
   if (!token) return <Navigate to='/login' replace />
 
   // 4. Dynamic Router(动态路由，根据后台返回的菜单数据生成的一维数组)
+  // 用store存储起来
   const dynamicRouter: string[] = ['/dashboard/embedded', '/dashboard/dataVisualize']
 
   // 5. Static Router(静态路由，必须配置首页地址，否则不能进首页获取菜单、按钮权限等数据)，获取数据的时候会loading，所有配置首页地址也没问题
@@ -40,3 +50,13 @@ const AuthRouter = (props: { children: any }) => {
 }
 
 export default AuthRouter
+
+```
+
+#### 2. 路由守卫用法
+```tsx
+/** 在 App.tsx 中用路由守卫包裹着路由 */
+<AuthRouter>
+  <Router />
+</AuthRouter>
+```
