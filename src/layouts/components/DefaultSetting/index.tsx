@@ -33,6 +33,8 @@ const Primary = [
   { label: '拂晓蓝', value: '#1890ff' },
   { label: '酱紫', value: '#722ed1' },
   { label: '日暮', value: '#faad14' },
+  { label: '小黄人', value: '#f2d318' },
+  { label: '蓝', value: '#065bc5' },
 ]
 
 /** 默认设置 - 主题-整体风格设置 */
