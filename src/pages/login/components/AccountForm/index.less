@@ -14,6 +14,7 @@
     top: 50%;
     left: 10px;
     z-index: 0;
+    width: 100%;
     transform: translateY(-50%);
 
     &::after {
@@ -21,6 +22,7 @@
       top: 50%;
       left: 0;
       z-index: -2;
+      display: block;
       padding: 0 4px;
       cursor: text;
       background-color: #fff;
@@ -37,8 +39,7 @@
 
   .placeholder-focus {
     &::after {
-      top: -22px;
-      color: @primary-color;
+      top: -21px;
     }
   }
 

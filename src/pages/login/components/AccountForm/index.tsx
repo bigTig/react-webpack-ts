@@ -21,10 +21,10 @@ const AccountForm: React.FC = () => {
   const passwordRef = useRef<InputRef>(null)
   const [activeType, setActiveType] = useState('')
 
-  const placeholderClassName = useEmotionCss(({ token }) => {
+  const placeholderActiveClassName = useEmotionCss(({ token }) => {
     return {
       [`&::after`]: {
-        color: token.colorTextQuaternary,
+        color: token.colorPrimary,
       },
     }
   })
@@ -55,11 +55,7 @@ const AccountForm: React.FC = () => {
       onFinishFailed={handleOnFinishFailed}
     >
       <Form.Item>
-        <Form.Item
-          name='username'
-          noStyle
-          rules={[{ required: true, message: 'Please input your Username!' }]}
-        >
+        <Form.Item name='username' noStyle rules={[{ required: true, message: '请输入用户名' }]}>
           <Input
             ref={usenameRef}
             onBlur={() => setActiveType('')}
@@ -68,26 +64,22 @@ const AccountForm: React.FC = () => {
         </Form.Item>
         <span
           className={classNames(
-            placeholderClassName,
             styles['placeholder-label'],
             activeType === 'Username' || loginForm?.getFieldValue('username')
               ? styles['placeholder-focus']
               : '',
+            activeType === 'Username' ? placeholderActiveClassName : '',
           )}
-          data-placeholder='Username'
+          style={{ color: token.colorTextQuaternary }}
+          data-placeholder='请输入用户名'
           onClick={() => {
-            console.log()
             usenameRef.current?.focus()
             setActiveType('Username')
           }}
         />
       </Form.Item>
       <Form.Item>
-        <Form.Item
-          name='password'
-          noStyle
-          rules={[{ required: true, message: 'Please input your Password!' }]}
-        >
+        <Form.Item name='password' noStyle rules={[{ required: true, message: '请输入密码' }]}>
           <Input
             ref={passwordRef}
             type='password'
@@ -97,13 +89,14 @@ const AccountForm: React.FC = () => {
         </Form.Item>
         <span
           className={classNames(
-            placeholderClassName,
             styles['placeholder-label'],
             activeType === 'Password' || loginForm?.getFieldValue('password')
               ? styles['placeholder-focus']
               : '',
+            activeType === 'Password' ? placeholderActiveClassName : '',
           )}
-          data-placeholder='Password'
+          data-placeholder='请输入密码'
+          style={{ color: token.colorTextQuaternary }}
           onClick={() => {
             passwordRef.current?.focus()
             setActiveType('Password')
@@ -113,11 +106,11 @@ const AccountForm: React.FC = () => {
       <Form.Item className={styles['ant-form-item-none-margin']}>
         <Space>
           <Form.Item name='remember' valuePropName='checked' noStyle>
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>记住密码</Checkbox>
           </Form.Item>
 
           <a className={styles['login-form-forgot']} style={{ color: token.colorPrimary }}>
-            Forgot password
+            忘记密码?
           </a>
         </Space>
       </Form.Item>
@@ -128,18 +121,18 @@ const AccountForm: React.FC = () => {
         rules={[
           {
             validator: (_, value) =>
-              value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+              value ? Promise.resolve() : Promise.reject(new Error('请先阅读并同意用户协议')),
           },
         ]}
       >
         <Checkbox>
-          I have read the <a href=''>agreement</a>
+          已阅读并同意 <a style={{ color: token.colorPrimary }}>《猪猪管家用户协议》</a>
         </Checkbox>
       </Form.Item>
 
       <Form.Item>
         <Button type='primary' block htmlType='submit' className='login-form-button'>
-          Log in
+          登 录
         </Button>
       </Form.Item>
     </Form>
