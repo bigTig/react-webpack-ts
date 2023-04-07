@@ -1,9 +1,11 @@
-## 路由权限
+## react-router v6 路由守卫最佳实践!
 
 ### （一）路由权限的设计方案
-> 利用hook封装路由守卫，结合路由权限集，进行匹配拦截
+
+> 利用 hook 封装路由守卫，结合路由权限集，进行匹配拦截
 
 #### 1. 路由守卫的封装
+
 ```tsx
 /** 路由守卫 */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -50,10 +52,10 @@ const AuthRouter = (props: { children: any }) => {
 }
 
 export default AuthRouter
-
 ```
 
 #### 2. 路由守卫用法
+
 ```tsx
 /** 在 App.tsx 中用路由守卫包裹着路由 */
 <AuthRouter>
