@@ -1,7 +1,5 @@
 import { DefaultConfigProps } from '@/typings/global'
 
-const tps609606 = require('@/assets/images/common/tps-609-606.png')
-const tps884496 = require('@/assets/images/common/tps-884-496.png')
 const titleLogo = require('@/assets/images/common/title_logo.svg')
 
 const defaultProps: DefaultConfigProps = {
@@ -29,24 +27,9 @@ const defaultProps: DefaultConfigProps = {
     },
     header: {
       colorBgHeader: '#FFFFFF',
-      colorHeaderTitle: '#00b96b',
-      heightLayoutHeader: 64,
-      colorBgMenuItemHover: '#217BA0',
-      colorBgMenuItemSelected: '#46A0C0',
-      colorTextMenuSelected: '#FFFFFF',
-      colorTextMenuActive: '#FFFFFF',
-      colorTextMenu: '#FFFFFF',
-      colorTextMenuSecondary: '#FFFFFF',
+      layoutHeaderHeight: 64,
     },
     sider: {
-      colorMenuBackground: '#FFFFFF', // 背景色
-      colorBgMenuItemCollapsedHover: '#EFFAFF',
-      colorBgMenuItemCollapsedSelected: '#EFFAFF',
-      colorBgMenuItemCollapsedElevated: '#EFFAFF',
-      colorTextMenuSelected: '#217BA0', // 选中的字体颜色
-      colorTextMenuItemHover: '#217BA0', // 鼠标经过的字体颜色
-      colorTextMenuActive: '#217BA0', //
-      colorTextMenu: 'rgba(0,0,0,0.65)', // 字体颜色
       marginLayoutMenu: 12,
       paddingLayoutMenu: 4,
       borderRadiusMenu: 8,
@@ -57,26 +40,6 @@ const defaultProps: DefaultConfigProps = {
       paddingBlockPageContainerContent: 12,
     },
   },
-  bgLayoutImgList: [
-    {
-      src: tps609606,
-      left: 85,
-      bottom: 100,
-      height: 303,
-    },
-    {
-      src: tps609606,
-      bottom: -68,
-      right: -45,
-      height: 303,
-    },
-    {
-      src: tps884496,
-      bottom: 0,
-      left: 0,
-      width: 331,
-    },
-  ],
 }
 
 export default defaultProps
