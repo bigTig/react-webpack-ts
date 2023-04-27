@@ -22,7 +22,6 @@ const AuthRouter = (props: { children: any }) => {
 
   // 2. 判断当前路由是否需要访问权限（不需要直接放行）
   if (!route.meta?.auth) return props?.children
-
   if (!token) return <Navigate to='/login' replace />
 
   // 4. Dynamic Router(动态路由，根据后台返回的菜单数据生成的一维数组)

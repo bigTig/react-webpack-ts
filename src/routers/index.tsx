@@ -18,7 +18,7 @@ export const routerArray = metaRouters.keys().reduce((modules: any, path) => {
 export const rootRouter: metaRoutersProps[] = [
   {
     path: '/',
-    element: <Navigate to='/login' />,
+    element: <Navigate to='/home/index' />,
   },
   {
     path: '/login',

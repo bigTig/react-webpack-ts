@@ -20,6 +20,7 @@ const menuRouter: Array<metaRoutersProps> = [
         meta: {
           title: '菜单1',
           key: 'menu1',
+          auth: true,
         },
       },
       {
@@ -31,6 +32,7 @@ const menuRouter: Array<metaRoutersProps> = [
             meta: {
               title: '菜单2-1',
               key: 'menu21',
+              auth: true,
             },
           },
           {
@@ -44,6 +46,7 @@ const menuRouter: Array<metaRoutersProps> = [
                 meta: {
                   title: '菜单2-2-1',
                   key: 'menu221',
+                  auth: true,
                 },
               },
               {
@@ -56,12 +59,14 @@ const menuRouter: Array<metaRoutersProps> = [
                   hideSide: true,
                   title: '菜单2-2-2',
                   key: 'menu222',
+                  auth: true,
                 },
               },
             ],
             meta: {
               title: '菜单2-2',
               key: 'menu221',
+              auth: true,
             },
           },
           {
@@ -70,12 +75,14 @@ const menuRouter: Array<metaRoutersProps> = [
             meta: {
               title: '菜单2-3',
               key: 'menu23',
+              auth: true,
             },
           },
         ],
         meta: {
           title: '菜单2-1',
           key: 'menu21',
+          auth: true,
         },
       },
       {
@@ -84,6 +91,7 @@ const menuRouter: Array<metaRoutersProps> = [
         meta: {
           title: '菜单3',
           key: 'menu3',
+          auth: true,
         },
       },
     ],

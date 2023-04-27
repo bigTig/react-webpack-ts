@@ -32,7 +32,7 @@ const AccountForm: React.FC = () => {
   const handleOnFinish = async (values: any) => {
     console.log('Success:', values)
     try {
-      navigate('/dashboard/dataVisualize')
+      navigate('/')
       setGlobalTokenAtom('token')
     } catch (err) {
       console.log(err)

@@ -17,6 +17,7 @@ const homeRouter: Array<metaRoutersProps> = [
           title: '首页',
           key: 'home',
           icon: 'HomeOutlined',
+          auth: true,
         },
       },
     ],
