@@ -1,4 +1,4 @@
-## 猪猪管家
+## react18-webpack5-ts
 
 ### 一、介绍 📖
 
@@ -6,7 +6,7 @@
 
 ### 二、Git 仓库地址 (欢迎 Star⭐)
 
-- GitHub：https://github.com/bigTig/react-webpack-ts.git
+- [GitHub：仓库地址](https://github.com/bigTig/react-webpack-ts.git)
 
 ### 三、🔨🔨🔨 项目功能
 

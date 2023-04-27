@@ -37,7 +37,14 @@ const Login: React.FC = () => {
       }}
     >
       <div className={classNames(styles.container, containerClassName)}>
-        {globalSystemTypeState === 0 ? <div className={styles['left-container']} /> : null}
+        {globalSystemTypeState === 0 ? (
+          <div className={styles['left-container']}>
+            <div className={styles['left-logo']}>
+              <div className={styles.title}>猪猪管家·运营平台</div>
+              <div className={styles.tip}>与科技同行，与用户更近</div>
+            </div>
+          </div>
+        ) : null}
         <div className={classNames(styles['right-container'], rightClassName)}>
           <div className={styles.logo} />
           <div className={styles['logo-tip']} style={{ color: token.colorPrimary }}>

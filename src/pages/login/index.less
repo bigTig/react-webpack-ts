@@ -8,7 +8,6 @@
   align-items: center;
   justify-content: center;
   background-color: @body-background;
-  // background-image: url('@/assets/images/common/login_bg.png');
   background-repeat: no-repeat;
 
   .container {
@@ -28,31 +27,39 @@
       height: 100%;
       overflow: hidden;
       background-color: rgba(83, 182, 164, 42.5%);
+      background-image: url('@/assets/images/common/product_gallery_illustration.svg');
+      background-repeat: no-repeat;
+      background-position: center 352px;
+    }
 
-      &::before,
-      &::after {
-        position: absolute;
-        left: 50%;
-        min-width: 200%;
-        min-height: 200%;
-        content: '';
-        background-image: linear-gradient(124deg, #2b7fc4 0%, #53b6a4 100%);
-        animation-name: rotate;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
+    .left-logo {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      display: flex;
+      width: 400px;
+      height: 100px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 10.2%);
+      border-radius: 8px;
+      transform: translateX(-50%);
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: -4px 4px 60px 0 #00686e1f;
+
+      .title {
+        margin-bottom: 4px;
+        font-size: 26px;
+        color: #fff;
+        text-align: center;
       }
 
-      &::before {
-        bottom: 15vh;
-        border-radius: 45%;
-        animation-duration: 14s;
-      }
-
-      &::after {
-        bottom: 11vh;
-        border-radius: 47%;
-        opacity: .5;
-        animation-duration: 14s;
+      .tip {
+        font-size: 16px;
+        letter-spacing: 5px;
+        color: #fff;
+        text-align: center;
       }
     }
 
