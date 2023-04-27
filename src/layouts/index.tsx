@@ -96,12 +96,24 @@ const BasicLayout: React.FC = () => {
         <Layout className={styles['basic-layout-container']}>
           {breadcrumb ? <BasicBreadcrumb /> : null}
           <Content
-            style={{
-              padding: pageContainer?.paddingInlinePageContainerContent,
-              paddingTop: breadcrumb ? 0 : pageContainer?.paddingInlinePageContainerContent,
-            }}
+            style={
+              currentMenuState.meta?.iframeUrl
+                ? {}
+                : {
+                    padding: pageContainer?.paddingInlinePageContainerContent,
+                    paddingTop: breadcrumb ? 0 : pageContainer?.paddingInlinePageContainerContent,
+                  }
+            }
           >
-            <Outlet></Outlet>
+            {currentMenuState.meta?.iframeUrl ? (
+              <iframe
+                src={currentMenuState.meta?.iframeUrl}
+                className={styles['basic-layout-iframe']}
+              />
+            ) : (
+              <Outlet></Outlet>
+            )}
+
             {/* 悬浮按钮 */}
             <DefaultSetting />
           </Content>

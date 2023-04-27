@@ -33,6 +33,14 @@ const dashboardRouter: metaRoutersProps[] = [
           auth: true,
         },
       },
+      {
+        path: '/dashboard/iframe',
+        meta: {
+          title: 'iframe嵌套页面',
+          key: 'iframe',
+          iframeUrl: 'https://www.bing.com/?mkt=zh-cn',
+        },
+      },
     ],
   },
 ]

@@ -11,6 +11,8 @@ export interface MetaProps {
   key: string
   /** 图标 - 暂只支持 antd-icon */
   icon?: string
+  /** 是否为 iframe */
+  iframeUrl?: string
 }
 
 export interface metaRoutersProps {
