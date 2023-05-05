@@ -6,7 +6,6 @@ import numeral from 'numeral'
 import React from 'react'
 import NumberInfo from '../NumberInfo'
 import Trend from '../Trend'
-import styles from './index.less'
 
 const columns = [
   {
@@ -25,7 +24,6 @@ const columns = [
     dataIndex: 'count',
     key: 'count',
     sorter: (a: { count: number }, b: { count: number }) => a.count - b.count,
-    className: styles.alignRight,
   },
   {
     title: '周涨幅',
