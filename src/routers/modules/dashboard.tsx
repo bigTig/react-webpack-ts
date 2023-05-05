@@ -16,10 +16,10 @@ const dashboardRouter: metaRoutersProps[] = [
     },
     children: [
       {
-        path: '/dashboard/dataVisualize',
-        element: lazyLoad(React.lazy(() => import('@/pages/dashboard/dataVisualize/index'))),
+        path: '/dashboard/analysis',
+        element: lazyLoad(React.lazy(() => import('@/pages/dashboard/analysis/index'))),
         meta: {
-          title: '数据可视化',
+          title: '分析页',
           key: 'dataVisualize',
           auth: true,
         },

@@ -25,7 +25,11 @@ const AuthRouter = (props: { children: any }) => {
   if (!token) return <Navigate to='/login' replace />
 
   // 4. Dynamic Router(动态路由，根据后台返回的菜单数据生成的一维数组)
-  const dynamicRouter: string[] = ['/dashboard/embedded', '/dashboard/dataVisualize']
+  const dynamicRouter: string[] = [
+    '/dashboard/embedded',
+    '/dashboard/analysis',
+    '/dataScreen/analysis',
+  ]
 
   // 5. Static Router(静态路由，必须配置首页地址，否则不能进首页获取菜单、按钮权限等数据)，获取数据的时候会loading，所有配置首页地址也没问题
   const staticRouter = [HOME_URL, '/403']

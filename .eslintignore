@@ -6,4 +6,4 @@ config
 prettierrc
 .DS_Store
 .eslintrc.json
-node_modules
+node_modules/

@@ -1,0 +1,44 @@
+.statistics-card {
+  padding: 12px;
+  margin-right: 12px;
+  margin-bottom: 12px;
+  background-color: #fff;
+  border-radius: 4px;
+  flex: 1;
+  box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 5%);
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  .statistics-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 8px;
+  }
+
+  .statistics-contanier {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 80px;
+    padding-bottom: 8px;
+  }
+
+  .statistics-footer {
+    position: relative;
+    padding-top: 8px;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #eff1f2;
+      content: '';
+    }
+  }
+}

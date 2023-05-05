@@ -11,7 +11,7 @@ const defaultProps: DefaultConfigProps = {
   footer: false,
   headerTheme: false,
   navTheme: 'light',
-  layout: 'top',
+  layout: 'mix',
   title: '猪猪管家',
   logo: titleLogo,
   token: {
@@ -22,6 +22,7 @@ const defaultProps: DefaultConfigProps = {
       colorInfo: '', // 用于表示操作信息的 Token 序列
       colorError: '#F53F3F', // 用于表示操作失败的 Token 序列
       colorTextBase: '#000000', // 用于派生文本色梯度的基础变量
+      colorLinkHover: '#00b96b',
       controlHeight: 32,
       fontSize: 14,
     },

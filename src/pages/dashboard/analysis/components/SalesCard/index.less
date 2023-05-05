@@ -1,0 +1,80 @@
+.sales-card {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px 0 rgba(0, 21, 41, 5%);
+
+  :global {
+    .ant-tabs-nav-wrap {
+      padding-left: 12px;
+    }
+
+    .ant-tabs-extra-content {
+      padding-right: 12px;
+    }
+  }
+
+  .sales-bar {
+    padding: 0 0 16px 16px;
+  }
+
+  .sales-rank {
+    padding: 0 16px 0 36px;
+  }
+}
+
+.ranking-list {
+  padding: 0;
+  margin: 25px 0 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+    zoom: 1;
+
+    &::before,
+    &::after {
+      display: table;
+      content: ' ';
+    }
+
+    &::after {
+      height: 0;
+      clear: both;
+      font-size: 0;
+      visibility: hidden;
+    }
+
+    span {
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    .ranking-item-number {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-top: 1.5px;
+      margin-right: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 20px;
+      text-align: center;
+      border-radius: 20px;
+
+      &.active {
+        color: #fff;
+        background-color: #314659;
+      }
+    }
+
+    .ranking-item-title {
+      margin-right: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+  }
+}

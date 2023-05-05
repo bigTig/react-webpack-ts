@@ -1,4 +1,6 @@
 import { ConfigProvider } from 'antd'
+import locale from 'antd/locale/zh_CN'
+import 'dayjs/locale/zh-cn'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router-dom'
@@ -50,6 +52,7 @@ const App = () => {
 
   return (
     <ConfigProvider
+      locale={locale}
       theme={{
         token: token,
         components: {
