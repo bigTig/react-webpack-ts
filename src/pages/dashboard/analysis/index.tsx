@@ -5,6 +5,7 @@ import type { Dayjs } from 'dayjs'
 import React, { useState } from 'react'
 import IntroduceRow from './components/IntroduceRow'
 import SalesCard, { TimeType } from './components/SalesCard'
+import SalesHot from './components/SalesHot'
 import styles from './index.less'
 import { getTimeDistance } from './utils/utils'
 
@@ -64,6 +65,7 @@ const Analysis: React.FC = () => {
         handleRangePickerChange={handleRangePickerChange}
         selectDate={selectDate}
       />
+      <SalesHot />
     </div>
   )
 }

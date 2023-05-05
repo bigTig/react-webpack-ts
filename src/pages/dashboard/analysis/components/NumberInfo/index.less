@@ -1,0 +1,49 @@
+.number-info {
+  .suffix {
+    margin-left: 4px;
+    font-size: 16px;
+    font-style: normal;
+  }
+
+  .number-info-title {
+    margin-bottom: 16px;
+    transition: all .3s;
+  }
+
+  .number-info-sub-title {
+    height: 22px;
+    overflow: hidden;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+  }
+
+  .number-info-value {
+    margin-top: 4px;
+    overflow: hidden;
+    font-size: 0;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+
+    & > span {
+      display: inline-block;
+      height: 32px;
+      margin-right: 32px;
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .sub-total {
+      margin-right: 0;
+      vertical-align: top;
+
+      .anticon {
+        margin-left: 4px;
+        font-size: 12px;
+        transform: scale(.82);
+      }
+    }
+  }
+}
