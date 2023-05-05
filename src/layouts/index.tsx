@@ -69,7 +69,7 @@ const BasicLayout: React.FC = () => {
         </div>
       </Header>
       <Layout>
-        {(sideMenuState.length || layout === 'side') && layout !== 'top' ? (
+        {(sideMenuState?.length || layout === 'side') && layout !== 'top' ? (
           <Sider
             className={`${styles['basic-sider']} ${layout === 'mix' && basicSiderClassName}`}
             trigger={null}

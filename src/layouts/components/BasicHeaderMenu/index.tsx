@@ -36,9 +36,13 @@ const BasicHeaderMenu: React.FC = () => {
         setMenuAtom([])
       } else {
         console.log(router)
-        const path: any = router.children && router.children[0].path
-        navigate(path)
-        setMenuAtom(router.children as metaRoutersProps[])
+        if (router.children) {
+          const path: any = router.children && router.children[0].path
+          navigate(path)
+          setMenuAtom(router.children as metaRoutersProps[])
+        } else {
+          navigate(router.path)
+        }
       }
     }
   }

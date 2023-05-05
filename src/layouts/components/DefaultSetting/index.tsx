@@ -25,8 +25,8 @@ const Style = [
 ]
 const Sider = [
   { label: '侧边菜单布局', value: 'side' },
-  { label: '顶部菜单布局', value: 'mix' },
-  { label: '混合菜单布局', value: 'top' },
+  { label: '混合菜单布局', value: 'mix' },
+  { label: '顶部菜单布局', value: 'top' },
 ]
 const Primary = [
   { label: '极光绿（默认）', value: '#00b96b' },
