@@ -149,6 +149,10 @@ react-webpack-ts
 
 ### 七、项目截图预览
 
+![alt 登录页](https://cdn.nlark.com/yuque/0/2023/png/1635680/1683337900112-66871b65-71a7-47a0-b91a-da2698e8a740.png?x-oss-process=image%2Fresize%2Cw_1500%2Climit_0)
+
+![alt 数据分析页](https://cdn.nlark.com/yuque/0/2023/png/1635680/1683337750250-f895c386-5688-46f0-8fd8-5936d170921e.png?x-oss-process=image%2Fresize%2Cw_1500%2Climit_0)
+
 ### 八、浏览器支持
 
 > 默认支持以下浏览器。更多浏览器可以查看 [Can I Use Es Module](https://caniuse.com/?search=ESModule) > **💢 请不要使用 QQ 浏览器开发，QQ 浏览器 不识别 某些 ES6 以上语法**
