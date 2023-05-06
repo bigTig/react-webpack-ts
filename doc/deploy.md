@@ -1,0 +1,43 @@
+# 一个 workflow，名为 Deploy
+
+name: Deploy
+
+on: # 此 CI/CD 触发时的事件
+push: # 在代码提交时自动触发
+branches: - develop # 触发的分支
+
+# 一个 CI/CD 的工作流有许多 jobs 组成，比如最典型的 job 是 lint，test，build。
+
+jobs:
+build-and-deploy: # 构建 job
+runs-on: ubuntu-latest # 跑 workflow 的服务器系统
+
+    steps: # job的一系列动作
+      # 切换分支获取源码
+      - name: Checkout # step的名称，将会在 github action 的控制台中显示
+        uses: actions/checkout@v3 # 选择一个action，可以理解为若干 steps.run，有利于代码复用
+
+      # 安装使用 node:14.18.0
+      - name: Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.18.0 # node版本
+
+      # 运行命令，npm install
+      - name: Install
+        run: node -v && yarn
+
+      # 运行命令，npm run build
+      - name: Build
+        run: yarn build
+
+      # 部署到腾讯云服务器
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 本地.ssh文件下的私钥id_rsa，存在secrets中
+          ARGS: '-avzr --delete' # 复制操作的参数。"-avzr --delete"意味着部署时清空云服务器目标目录下的文件
+          SOURCE: 'dist/' # 源目录，相对于$GITHUB_WORKSPACE根目录的路径
+          REMOTE_HOST: '175.178.11.10' # 服务器域名
+          REMOTE_USER: 'root' # 腾讯云默认用户名为root
+          TARGET: '/usr/share/nginx/html' # 目标目录
