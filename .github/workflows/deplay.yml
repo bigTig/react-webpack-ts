@@ -46,4 +46,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          rsync -avz --delete ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
+          rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
