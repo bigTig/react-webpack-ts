@@ -33,6 +33,8 @@ jobs:
       # 部署到腾讯云服务器
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
       - name: Add SSH Private Key
         run: echo "${{ secrets.SERVER_SSH_KEY }}" | ssh-add -
