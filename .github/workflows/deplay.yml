@@ -44,6 +44,7 @@ jobs:
       - name: Install rsync
         run: sudo apt-get update && sudo apt-get install -y rsync
 
+      - name: Deploy
       uses: easingthemes/ssh-deploy@v2.2.2
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
@@ -54,3 +55,4 @@ jobs:
           server: 175.178.11.10
           port: 22
           username: root
+`
