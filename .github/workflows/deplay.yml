@@ -44,11 +44,6 @@ jobs:
       - name: Install rsync
         run: sudo apt-get update && sudo apt-get install -y rsync
 
-      - name: Add host key to known_hosts
-        run: |
-          chmod 700 ~/.ssh
-          ssh-keyscan -H 178.175.11.10 >> ~/.ssh/known_hosts
-
       - name: Deploy to server
         run: |
-          rsync -avz --delete ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
+          rsync -avz --delete "ssh -o StrictHostKeyChecking=no" ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
