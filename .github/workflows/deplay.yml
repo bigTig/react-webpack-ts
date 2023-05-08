@@ -32,7 +32,7 @@ jobs:
 
       # 部署到腾讯云服务器
       - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.4.1
+        uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
