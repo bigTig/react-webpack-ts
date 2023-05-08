@@ -33,9 +33,10 @@ jobs:
       # 部署到腾讯云服务器
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: echo "${{ secrets.SERVER_SSH_KEY }}" | ssh-add -
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
 
       - name: Deploy to server
         run: |
-          rsync -avz --delete dist/ root@175.178.11.10:/home/www
+          rsync -avz --delete ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
