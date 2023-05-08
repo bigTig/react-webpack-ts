@@ -20,7 +20,7 @@ jobs:
       - name: Node
         uses: actions/setup-node@v3
         with:
-          node-version: 16.14.0 # node版本
+          node-version: 14.18.0 # node版本
 
       # 运行命令，npm install
       - name: Install
