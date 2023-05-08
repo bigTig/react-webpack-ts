@@ -45,14 +45,14 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y rsync
 
       - name: Deploy
-      uses: easingthemes/ssh-deploy@v2.2.2
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-        with:
-          local_dir: './dist/'
-          remote_dir: /var/www/html/
-          server: 175.178.11.10
-          port: 22
-          username: root
+        uses: easingthemes/ssh-deploy@v2.2.2
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+            ARGS: "-rltgoDzvO --delete"
+          with:
+            local_dir: './dist/'
+            remote_dir: /var/www/html/
+            server: 175.178.11.10
+            port: 22
+            username: root
 `
