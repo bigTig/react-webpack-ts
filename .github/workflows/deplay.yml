@@ -41,6 +41,9 @@ jobs:
         env:
           SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
 
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+
       - name: Deploy to server
         run: |
           rsync -avz --delete ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
