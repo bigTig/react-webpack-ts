@@ -1,0 +1,41 @@
+# 一个workflow，名为Deploy
+name: Deploy
+
+on: # 此CI/CD触发时的事件
+  push: # 在代码提交时自动触发
+    branches:
+      - develop # 触发的分支
+
+# 一个 CI/CD 的工作流有许多 jobs 组成，比如最典型的 job 是 lint，test，build。
+jobs:
+  build-and-deploy: # 构建job
+    runs-on: ubuntu-latest # 跑workflow的服务器系统
+
+    steps: # job的一系列动作
+      # 切换分支获取源码
+      - name: Checkout # step的名称，将会在 github action 的控制台中显示
+        uses: actions/checkout@v3 # 选择一个action，可以理解为若干 steps.run，有利于代码复用
+
+      # 安装使用 node:16.10.0
+      - name: Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0 # node版本
+
+      # 运行命令，npm install
+      - name: Install
+        run: node -v && yarn
+
+      # 运行命令，npm run build
+      - name: Build
+        run: yarn build
+
+      # 部署到腾讯云服务器
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to server
+        run: |
+          rsync -avz --delete dist/ root@175.178.11.10:/home/www
