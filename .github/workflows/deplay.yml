@@ -44,6 +44,13 @@ jobs:
       - name: Install rsync
         run: sudo apt-get update && sudo apt-get install -y rsync
 
-      - name: Deploy to server
-        run: |
-          rsync -avz --delete "ssh -o StrictHostKeyChecking=no" ./dist/ root@${{ secrets.SERVER_IP_ADDRESS }}:/var/www/html/
+      uses: easingthemes/ssh-deploy@v2.2.2
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+        with:
+          local_dir: './dist/'
+          remote_dir: /var/www/html/
+          server: 175.178.11.10
+          port: 22
+          username: root
