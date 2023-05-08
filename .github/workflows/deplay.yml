@@ -44,8 +44,10 @@ jobs:
       - name: Install rsync
         run: sudo apt-get update && sudo apt-get install -y rsync
 
-      - name: Ssh-keyscan
-        run: ssh-keyscan -H 178.175.11.10 >> ~/.ssh/known_hosts
+      - name: Add host key to known_hosts
+        run: |
+          chmod 700 ~/.ssh
+          ssh-keyscan -H 178.175.11.10 >> ~/.ssh/known_hosts
 
       - name: Deploy to server
         run: |
