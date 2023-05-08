@@ -41,12 +41,12 @@ jobs:
         env:
           SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
 
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }} # 本地.ssh文件下的私钥id_rsa，存在secrets中
-          ARGS: '-avzr --delete' # 复制操作的参数。"-avzr --delete"意味着部署时清空云服务器目标目录下的文件
-          SOURCE: './dist/' # 源目录，相对于$GITHUB_WORKSPACE根目录的路径
-          REMOTE_HOST: '175.178.11.10' # 服务器域名
-          REMOTE_USER: 'root' # 腾讯云默认用户名为root
-          TARGET: '/var/www/html/' # 目标目录
+      - name: Deploy project to server
+        uses: burnett01/rsync-deployments@4.0
+        with:
+          switches: '-avz --delete'
+          remote_path: '/var/www/html/'
+          local_path: './dist/'
+          remote_host: '175.178.11.10'
+          remote_user: root
+          remote_key: ${{ secrets.SERVER_SSH_KEY }}
