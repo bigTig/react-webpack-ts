@@ -14,7 +14,7 @@ jobs:
     steps: # job的一系列动作
       # 切换分支获取源码
       - name: Checkout # step的名称，将会在 github action 的控制台中显示
-        uses: actions/checkout@v3 # 选择一个action，可以理解为若干 steps.run，有利于代码复用
+        uses: actions/checkout@v2 # 选择一个action，可以理解为若干 steps.run，有利于代码复用
 
       # 安装使用 node:16.10.0
       - name: Node
@@ -30,19 +30,16 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Add host key to known_hosts
-        run: |
-          mkdir -p ~/.ssh && chmod 700 ~/.ssh
-          ssh-keyscan -t rsa 175.178.11.10 >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-          ls ~/.ssh
-
       # 部署到腾讯云服务器
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v4.1.8
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          REMOTE_USER: 'root'
-          REMOTE_HOST: '175.178.11.10'
-          SOURCE: 'dist/'
-          TARGET: '/var/www/html/'
+      - name: Copy file to remote server
+        run: |
+          ssh-keyscan 175.178.11.10 >> ~/.ssh/known_hosts
+          scp -i ${{ secrets.SERVER_SSH_KEY }} dist/ root@175.178.11.10:/var/www/html/
+      # - name: Deploy to server
+      #   uses: easingthemes/ssh-deploy@v4.1.8
+      #   env:
+      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+      #     REMOTE_USER: 'root'
+      #     REMOTE_HOST: '175.178.11.10'
+      #     SOURCE: 'dist/'
+      #     TARGET: '/var/www/html/'
