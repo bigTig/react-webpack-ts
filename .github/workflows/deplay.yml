@@ -34,21 +34,8 @@ jobs:
       - name: Upload files to server
         uses: appleboy/scp-action@master
         with:
-          host: '175.178.11.10'
-          username: 'root'
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: './dist'
-          target: '/var/www/html'
-
-      # - name: Copy file to remote server
-      #  run: |
-      #    scp -i ${{ secrets.SERVER_SSH_KEY }} ./dist/ root@175.178.11.10:/var/www/html
-
-      # - name: Deploy to server
-      #   uses: easingthemes/ssh-deploy@v4.1.8
-      #   env:
-      #     SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-      #     REMOTE_USER: 'root'
-      #     REMOTE_HOST: '175.178.11.10'
-      #     SOURCE: 'dist/'
-      #     TARGET: '/var/www/html/'
+          host: ${{ secrets.SERVER_SSH_HOST }} # 服务器域名
+          username: ${{ secrets.SERVER_SSH_USER }} # 腾讯云默认用户名为root
+          key: ${{ secrets.SERVER_SSH_KEY }} # 本地.ssh文件下的私钥id_rsa，存在secrets中
+          source: './dist' # 源目录，相对于$GITHUB_WORKSPACE根目录的路径
+          target: ${{ secrets.SERVER_SSH_TARGET }} # 目标目录

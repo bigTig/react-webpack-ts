@@ -1,3 +1,6 @@
+# 自动部署到 腾讯云轻量服务器
+
+```yml
 # 一个 workflow，名为 Deploy
 
 name: Deploy
@@ -19,7 +22,7 @@ runs-on: ubuntu-latest # 跑 workflow 的服务器系统
 
       # 安装使用 node:14.18.0
       - name: Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 14.18.0 # node版本
 
@@ -32,12 +35,14 @@ runs-on: ubuntu-latest # 跑 workflow 的服务器系统
         run: yarn build
 
       # 部署到腾讯云服务器
-      - name: Deploy
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 本地.ssh文件下的私钥id_rsa，存在secrets中
-          ARGS: '-avzr --delete' # 复制操作的参数。"-avzr --delete"意味着部署时清空云服务器目标目录下的文件
-          SOURCE: 'dist/' # 源目录，相对于$GITHUB_WORKSPACE根目录的路径
-          REMOTE_HOST: '175.178.11.10' # 服务器域名
-          REMOTE_USER: 'root' # 腾讯云默认用户名为root
-          TARGET: '/usr/share/nginx/html' # 目标目录
+      - name: Upload files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_SSH_HOST }} # 服务器域名
+          username: ${{ secrets.SERVER_SSH_USER }} # 腾讯云默认用户名为root
+          key: ${{ secrets.SERVER_SSH_KEY }} # 本地.ssh文件下的私钥id_rsa，存在secrets中
+          source: './dist' # 源目录，相对于$GITHUB_WORKSPACE根目录的路径
+          target: ${{ secrets.SERVER_SSH_TARGET }} # 目标目录
+
+
+```
