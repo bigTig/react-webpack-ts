@@ -14,7 +14,7 @@ jobs:
     steps: # job的一系列动作
       # 切换分支获取源码
       - name: Checkout # step的名称，将会在 github action 的控制台中显示
-        uses: actions/checkout@v3] # 选择一个action，可以理解为若干 steps.run，有利于代码复用
+        uses: actions/checkout@v3 # 选择一个action，可以理解为若干 steps.run，有利于代码复用
 
       # 安装使用 node:16.10.0
       - name: Node
