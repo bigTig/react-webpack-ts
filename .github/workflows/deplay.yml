@@ -33,7 +33,6 @@ jobs:
       # 部署到腾讯云服务器
       - name: Copy file to remote server
         run: |
-          ssh-keyscan 175.178.11.10 >> ~/.ssh/known_hosts
           scp -i ${{ secrets.SERVER_SSH_KEY }} dist/ root@175.178.11.10:/var/www/html/
       # - name: Deploy to server
       #   uses: easingthemes/ssh-deploy@v4.1.8
