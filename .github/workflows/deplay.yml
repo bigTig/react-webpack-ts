@@ -38,10 +38,10 @@ jobs:
 
       # 部署到腾讯云服务器
       - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        with:
+        uses: easingthemes/ssh-deploy@v4.1.8
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           REMOTE_USER: 'root'
           REMOTE_HOST: '175.178.11.10'
-          SOURCE: './dist/'
+          SOURCE: 'dist/'
           TARGET: '/var/www/html/'
