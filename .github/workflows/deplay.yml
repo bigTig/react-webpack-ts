@@ -41,12 +41,9 @@ jobs:
         env:
           SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
 
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+
       - name: Deploy project to server
-        uses: burnett01/rsync-deployments@4.0
-        with:
-          switches: '-avz --delete'
-          remote_path: '/var/www/html/'
-          local_path: './dist/'
-          remote_host: '175.178.11.10'
-          remote_user: root
-          remote_key: ${{ secrets.SERVER_SSH_KEY }}
+        run: |
+          rsync -ravz --delete ./dist/ root@175.178.11.10:/var/www/html/
