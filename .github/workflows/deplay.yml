@@ -30,6 +30,9 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Delete known_hosts
+        run: rm ~/.ssh/known_hosts
+
       # 部署到腾讯云服务器
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.4.1
