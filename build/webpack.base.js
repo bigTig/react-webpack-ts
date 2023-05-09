@@ -68,7 +68,7 @@ module.exports = {
         include: [path.resolve(__dirname, '../src')],
         use: [
           // 开发环境使用style-looader,打包模式抽离css
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
@@ -92,7 +92,7 @@ module.exports = {
         include: [path.resolve(__dirname, '../src')],
         use: [
           // 开发环境使用style-looader,打包模式抽离css
-          isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
