@@ -36,6 +36,10 @@ jobs:
           ssh-keyscan -t rsa 175.178.11.10 >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
+      - name: Set private key permissions
+        run: |
+          chmod 400 /home/runner/.ssh/id_rsa
+
       # 部署到腾讯云服务器
       - name: Deploy to server
         uses: easingthemes/ssh-deploy@v4.1.8
