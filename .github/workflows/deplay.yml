@@ -32,7 +32,7 @@ jobs:
 
       # 部署到腾讯云服务器
       - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.2.2
+        uses: easingthemes/ssh-deploy@v2.1.5
         with:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           REMOTE_USER: 'root'
