@@ -30,23 +30,12 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Delete known_hosts
-        run: rm ~/.ssh/known_hosts
-
       # 部署到腾讯云服务器
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.4.1
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@v2.1.5
         with:
-          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
-
-      - name: Add SSH Private Key
-        run: echo "${{ secrets.SERVER_SSH_KEY }}" | ssh-add -
-        env:
-          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
-
-      - name: Install rsync
-        run: sudo apt-get update && sudo apt-get install -y rsync
-
-      - name: Deploy project to server
-        run: |
-          rsync -ravz --delete ./dist/ root@175.178.11.10:/var/www/html/
+          ssh_private_key: ${{ secrets.SERVER_SSH_KEY }}
+          username: 'root'
+          host: '175.178.11.10'
+          local_path: './dist/'
+          remote_path: '/var/www/html/'
