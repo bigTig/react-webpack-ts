@@ -31,18 +31,18 @@ jobs:
         run: yarn build
 
       # 部署到腾讯云服务器
-      # - name: Upload files to server
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: '175.178.11.10'
-      #     username: 'root'
-      #     key: ${{ secrets.SERVER_SSH_KEY }}
-      #     source: './dist'
-      #     target: '/var/www/html'
+      - name: Upload files to server
+        uses: appleboy/scp-action@master
+        with:
+          host: '175.178.11.10'
+          username: 'root'
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: './dist'
+          target: '/var/www/html'
 
-      - name: Copy file to remote server
-        run: |
-          scp -i ${{ secrets.SERVER_SSH_KEY }} ./dist/ root@175.178.11.10:/var/www/html
+      # - name: Copy file to remote server
+      #  run: |
+      #    scp -i ${{ secrets.SERVER_SSH_KEY }} ./dist/ root@175.178.11.10:/var/www/html
 
       # - name: Deploy to server
       #   uses: easingthemes/ssh-deploy@v4.1.8
