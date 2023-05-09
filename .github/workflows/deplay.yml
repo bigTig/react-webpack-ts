@@ -32,10 +32,10 @@ jobs:
 
       # 部署到腾讯云服务器
       - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v2.1.5
+        uses: easingthemes/ssh-deploy@v2.2.2
         with:
-          ssh_private_key: ${{ secrets.SERVER_SSH_KEY }}
-          username: 'root'
-          host: '175.178.11.10'
-          local_path: './dist/'
-          remote_path: '/var/www/html/'
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          REMOTE_USER: 'root'
+          REMOTE_HOST: '175.178.11.10'
+          SOURCE: './dist/'
+          TARGET: '/var/www/html/'
