@@ -149,6 +149,8 @@ react-webpack-ts
 
 ### 七、项目截图预览
 
+[项目预览地址](http://175.178.11.10)
+
 ![alt 登录页](https://cdn.nlark.com/yuque/0/2023/png/1635680/1683337900112-66871b65-71a7-47a0-b91a-da2698e8a740.png?x-oss-process=image%2Fresize%2Cw_1500%2Climit_0)
 
 ![alt 数据分析页](https://cdn.nlark.com/yuque/0/2023/png/1635680/1683337750250-f895c386-5688-46f0-8fd8-5936d170921e.png?x-oss-process=image%2Fresize%2Cw_1500%2Climit_0)
