@@ -16,16 +16,18 @@ const Login: React.FC = () => {
   const globalSystemTypeState = useRecoilValue(globalSystemTypeAtom)
 
   const rightClassName = useEmotionCss(() => {
-    const padding = ['110px 75px 100px', '110px 48px 100px', '110px 24px 100px']
+    const padding = ['110px 75px 100px', '110px 48px 100px', '110px 24px 100px', '110px 24px 100px']
     return {
       padding: padding[globalSystemTypeState],
     }
   })
 
   const containerClassName = useEmotionCss(() => {
-    const margin = ['', '0 75px', '0 16px']
+    const margin = ['', '0 75px', '0 45px', '0 16px']
+    const height = ['688px', '688px', '688px', '600px']
     return {
       margin: margin[globalSystemTypeState],
+      height: height[globalSystemTypeState],
     }
   })
 

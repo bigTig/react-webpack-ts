@@ -22,10 +22,10 @@ export const globalSystemConfigAtom = atom({
   effects_UNSTABLE: [localStorageEffect(LocalKeyEnum.SYSTEMCONFIG)],
 })
 
-/** global - 当前在什么系统下访问，0. web端（默认） 1. 移动端 2. 平板 */
+/** global - 当前在什么系统下访问，0. web端（默认） 1.大屏 平板 2.小屏 平板  3.移动端  */
 export const globalSystemTypeAtom = atom({
   key: 'globalSystemTypeState',
-  default: 0, // 0. web端（默认） 1. 移动端 2. 平板
+  default: 0, // 0. web端（默认） 1.大屏 平板 2.小屏 平板  3.移动端
 })
 
 /** global - 屏幕宽度 */

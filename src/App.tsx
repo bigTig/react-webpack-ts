@@ -10,7 +10,6 @@ import { searchRoute } from './routers/utils'
 import AuthRouter from './routers/utils/authRouter'
 import { globalScreenWidthAtom, globalSystemConfigAtom, globalSystemTypeAtom } from './store/global'
 import { currentMenuAtom } from './store/menus'
-import { validateIsMobile } from './utils/validate'
 
 const App = () => {
   const { pathname } = useLocation()
@@ -21,10 +20,6 @@ const App = () => {
   const setGlobalSScreenWidthAtom = useSetRecoilState(globalScreenWidthAtom)
   const { token, header } = globalSystemConfigState.token
 
-  useEffect(() => {
-    setGlobalSSystemTypeAtom(validateIsMobile() ? 1 : 0)
-  }, [setGlobalSSystemTypeAtom])
-
   /** 刷新后根据地址栏获取当前路由 */
   useEffect(() => {
     const route = searchRoute(pathname, rootRouter)
@@ -33,20 +28,40 @@ const App = () => {
 
   /** 监听窗口大小变化 */
   useEffect(() => {
-    window.onresize = () => {
-      return (() => {
-        const SCREENWIDTH = document.body.clientWidth
-        if (SCREENWIDTH >= 1200) {
-          setGlobalSSystemTypeAtom(0)
-        }
-        if (SCREENWIDTH < 1200 && SCREENWIDTH >= 800) {
-          setGlobalSSystemTypeAtom(1)
-        }
-        if (SCREENWIDTH >= 375 && SCREENWIDTH < 800) {
-          setGlobalSSystemTypeAtom(2)
-        }
-        setGlobalSScreenWidthAtom(SCREENWIDTH)
-      })()
+    let SCREENWIDTH = window.innerWidth
+
+    const validateInnerWidth = (width: number) => {
+      if (width >= 1200) {
+        setGlobalSSystemTypeAtom(0)
+      }
+      // 大屏iPad
+      if (width < 1200 && width >= 800) {
+        setGlobalSSystemTypeAtom(1)
+      }
+      // 小屏iPad
+      if (width < 800 && width >= 415) {
+        setGlobalSSystemTypeAtom(2)
+      }
+      // 正常手机端
+      if (width < 415) {
+        setGlobalSSystemTypeAtom(3)
+      }
+
+      setGlobalSScreenWidthAtom(width)
+    }
+
+    validateInnerWidth(SCREENWIDTH)
+
+    const handleResize = () => {
+      SCREENWIDTH = window.innerWidth
+      console.log(SCREENWIDTH)
+      validateInnerWidth(SCREENWIDTH)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
     }
   }, [setGlobalSScreenWidthAtom, setGlobalSSystemTypeAtom])
 

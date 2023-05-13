@@ -21,7 +21,7 @@ const LogoBasic: React.FC = () => {
     <NavLink to={location.pathname}>
       <div
         className={styles['basic-layout-header-logo']}
-        style={{ width: globalScreenWidthState < 900 ? 92 : siderWidth + 12 }}
+        style={{ width: globalScreenWidthState < 900 ? 64 : siderWidth + 12 }}
       >
         <img className={styles['basic-layout-logo-url']} src={logo} alt='' />
         <span
