@@ -38,7 +38,7 @@ const SalesHot: React.FC = () => {
       <Col xl={12} lg={24} md={24} sm={24} xs={24}>
         <TopSearch visitData2={[9, 4, 6, 7, 8, 1, 4]} searchData={SearchData} />
       </Col>
-      <Col xl={12} lg={24} md={24} sm={24} xs={24}>
+      <Col xl={12} lg={24} md={24} sm={24} xs={24} style={{ paddingLeft: 0 }}>
         <ProportionSales
           salesType={salesType}
           salesPieData={SalesPieData}
