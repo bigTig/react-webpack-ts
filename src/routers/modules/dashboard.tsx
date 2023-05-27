@@ -33,6 +33,16 @@ const dashboardRouter: metaRoutersProps[] = [
           auth: true,
         },
       },
+      {
+        path: '/dashboard/themeEditor',
+        element: lazyLoad(React.lazy(() => import('@/pages/themeEditor/index'))),
+        meta: {
+          hideMenu: true,
+          hideSide: true,
+          title: '主题编辑器',
+          key: 'themeEditor',
+        },
+      },
     ],
   },
 ]

@@ -11,12 +11,27 @@ import {
   SoundOutlined,
 } from '@ant-design/icons'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
-import { Alert, Button, Divider, Drawer, DrawerProps, Space, Switch, Tooltip, message } from 'antd'
+import {
+  Alert,
+  Button,
+  ColorPicker,
+  Divider,
+  Drawer,
+  DrawerProps,
+  Space,
+  Switch,
+  Tooltip,
+  message,
+  theme,
+} from 'antd'
+import { Color } from 'antd/es/color-picker'
 import classNames from 'classnames'
 import copy from 'copy-to-clipboard'
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styles from './index.less'
+
+const { useToken } = theme
 
 const Style = [
   { label: '亮色菜单风格', value: 'light' },
@@ -38,8 +53,23 @@ const Primary = [
 
 /** Layout 布局选择器 */
 const LayoutEditor: React.FC<DrawerProps> = props => {
+  const { token } = useToken()
+
   const [globalSystemConfigState, setGlobalSystemConfigAtom] =
     useRecoilState(globalSystemConfigAtom)
+
+  const [color, setColor] = useState<Color | string>('#1B00EB')
+  const bgColor = useMemo<string>(
+    () => (typeof color === 'string' ? color : color.toHexString()),
+    [color],
+  )
+
+  const divStyle: React.CSSProperties = {
+    width: token.sizeMD,
+    height: token.sizeMD,
+    borderRadius: token.borderRadiusSM,
+    backgroundColor: bgColor,
+  }
 
   const settingDrawerBlockItemCheckbox = useEmotionCss(({ token }) => {
     return {
@@ -103,6 +133,31 @@ const LayoutEditor: React.FC<DrawerProps> = props => {
                 </div>
               </Tooltip>
             ))}
+            {/* 自定义主题色 */}
+            <ColorPicker
+              value={color}
+              onChange={v => {
+                setColor(v)
+                setGlobalSystemConfigAtom({
+                  ...globalSystemConfigState,
+                  token: {
+                    ...globalSystemConfigState.token,
+                    token: {
+                      ...globalSystemConfigState.token.token,
+                      colorPrimary: v.toHexString(),
+                    },
+                  },
+                })
+              }}
+            >
+              <Space>
+                <div className={styles['theme-color-block']} style={divStyle}>
+                  {globalSystemConfigState.token.token?.colorPrimary === color ? (
+                    <CheckOutlined />
+                  ) : null}
+                </div>
+              </Space>
+            </ColorPicker>
           </div>
           <Divider orientation='center' orientationMargin='0'>
             <ApartmentOutlined style={{ marginRight: 5 }} />

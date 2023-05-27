@@ -1,0 +1,26 @@
+@import url('@/styles/variable.less');
+
+.theme-container {
+  position: relative;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.previewer-grid-demo {
+  :global(.ant-row) {
+    & > div:not(.gutter-row) {
+      display: inline-flex;
+      padding: 16px 0;
+      color: #fff;
+      background: #0092ff;
+      align-items: center;
+      justify-content: center;
+
+      &:nth-child(2n + 1) {
+        background: rgba(0, 146, 255, 75%);
+      }
+    }
+  }
+}
