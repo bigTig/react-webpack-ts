@@ -116,6 +116,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         selectedKeys: [],
         items: menuItems,
       }}
+      placement='topCenter'
     >
       <span className={actionClassName}>
         <AvatarLogo />
