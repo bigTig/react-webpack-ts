@@ -45,7 +45,7 @@ module.exports = {
     rules: [
       {
         // 配置 loader 解析 ts 和 jsx
-        include: [path.resolve(__dirname, '../src')], // 只对项目src文件的ts,tsx进行loader解析
+        include: [path.resolve(__dirname, '../src')], // 缩小loader作用范围 只对项目src文件的ts,tsx进行loader解析
         test: /.(ts|tsx)$/, // 匹配.ts, tsx文件
         // thread-loader就是用来开启多进程解析loader的
         // 借助多核cpu开启多线程loader解析,可以极大地提升loader解析的速度

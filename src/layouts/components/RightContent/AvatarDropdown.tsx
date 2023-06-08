@@ -51,7 +51,7 @@ const AvatarLogo = () => {
     <Avatar
       size='small'
       className={avatarClassName}
-      src={globalSystemConfigState.logo}
+      src={globalSystemConfigState.avatar}
       alt='avatar'
     />
   )
@@ -116,7 +116,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
         selectedKeys: [],
         items: menuItems,
       }}
-      placement='topCenter'
+      placement='top'
     >
       <span className={actionClassName}>
         <AvatarLogo />

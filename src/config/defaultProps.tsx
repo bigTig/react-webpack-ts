@@ -1,6 +1,7 @@
 import { DefaultConfigProps } from '@/typings/global'
 
-const titleLogo = require('@/assets/images/common/title_logo.svg')
+const titleLogo = require('@/assets/images/common/logo_simple.svg')
+const avatar = require('@/assets/images/common/title_logo.svg')
 
 const defaultProps: DefaultConfigProps = {
   location: {
@@ -12,8 +13,9 @@ const defaultProps: DefaultConfigProps = {
   headerTheme: false,
   navTheme: 'light',
   layout: 'mix',
-  title: '猪猪管家',
+  title: '程序猿阿峰',
   logo: titleLogo,
+  avatar: avatar,
   token: {
     token: {
       colorPrimary: '#00b96b', // 品牌色是体现产品特性和传播理念最直观的视觉元素之一

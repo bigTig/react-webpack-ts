@@ -33,6 +33,8 @@ export interface DefaultConfigProps {
   layout?: 'side' | 'top' | 'mix'
   /** logo */
   logo?: string
+  /** 默认头像 */
+  avatar?: string
   token: {
     /** 重置antd,自定义主题 */
     token?: Partial<AliasToken>

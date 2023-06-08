@@ -126,7 +126,7 @@ const AccountForm: React.FC = () => {
         ]}
       >
         <Checkbox>
-          已阅读并同意 <a style={{ color: token.colorPrimary }}>《猪猪管家用户协议》</a>
+          已阅读并同意 <a style={{ color: token.colorPrimary }}>《程序猿阿峰用户协议》</a>
         </Checkbox>
       </Form.Item>
 

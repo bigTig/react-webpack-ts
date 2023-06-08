@@ -6,7 +6,15 @@ import React from 'react'
 
 export type HeaderDropdownProps = {
   overlayClassName?: string
-  placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight' | 'bottomCenter'
+  placement?:
+    | 'topLeft'
+    | 'topCenter'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomCenter'
+    | 'bottomRight'
+    | 'top'
+    | 'bottom'
 } & Omit<DropDownProps, 'overlay'>
 
 const HeaderDropdown: React.FC<HeaderDropdownProps> = ({ overlayClassName: cls, ...restProps }) => {

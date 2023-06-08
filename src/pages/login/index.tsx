@@ -41,14 +41,18 @@ const Login: React.FC = () => {
       <div className={classNames(styles.container, containerClassName)}>
         {globalSystemTypeState === 0 ? (
           <div className={styles['left-container']}>
-            <div className={styles['left-logo']}>
-              <div className={styles.title}>猪猪管家·运营平台</div>
-              <div className={styles.tip}>与科技同行，与用户更近</div>
-            </div>
+            <a href='https://github.com/bigTig' target='_blank' rel='noreferrer'>
+              <div className={styles['left-logo']}>
+                <div className={styles.title}>程序猿阿峰·管理平台</div>
+                <div className={styles.tip}>与科技同行，与用户更近，欢迎 Star⭐</div>
+              </div>
+            </a>
           </div>
         ) : null}
         <div className={classNames(styles['right-container'], rightClassName)}>
-          <div className={styles.logo} />
+          <a href='https://github.com/bigTig' target='_blank' rel='noreferrer'>
+            <div className={styles.logo} />
+          </a>
           <div className={styles['logo-tip']} style={{ color: token.colorPrimary }}>
             Welcome back
           </div>
