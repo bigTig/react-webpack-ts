@@ -3,6 +3,7 @@ import { breadcrumbAtom } from '@/store/breadcrumb'
 import { currentMenuAtom } from '@/store/menus'
 import { LeftOutlined } from '@ant-design/icons'
 import { Breadcrumb, Button } from 'antd'
+import { ItemType } from 'antd/es/breadcrumb/Breadcrumb'
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
@@ -26,7 +27,7 @@ const BasicBreadcrumb: React.FC = () => {
   }, [breadcrumbState, pathname])
 
   /** 面包屑返回按钮 */
-  const breadcrumbBack = () => {
+  const BreadcrumbBack = () => {
     const isHideMenu = currentMenuState.meta?.hideSide
 
     return isHideMenu ? (
@@ -40,35 +41,37 @@ const BasicBreadcrumb: React.FC = () => {
     ) : null
   }
 
-  const itemRender = () => {
-    return (
-      <>
-        {breadcrumbBack()}
-        <Breadcrumb.Item>
-          <Link to={`${HOME_URL}`}>首页</Link>
-        </Breadcrumb.Item>
-        {breadcrumbList.map((item: string, index: number) => {
-          const last = index === breadcrumbList.length - 1
+  const breadcrumbItems = () => {
+    const extraBreadcrumbItems: ItemType[] = [
+      {
+        title: BreadcrumbBack(),
+        key: 'back',
+      },
+      {
+        title: <Link to={`${HOME_URL}`}>首页</Link>,
+        key: HOME_URL,
+      },
+    ]
 
-          return item && item !== '首页' ? (
+    breadcrumbList.forEach((item: string, index: number) => {
+      const last = index === breadcrumbList.length - 1
+
+      if (item && item !== '首页') {
+        extraBreadcrumbItems.push({
+          title: (
             <React.Fragment key={index}>
-              {last ? (
-                <Breadcrumb.Item key={index}>
-                  <span>{item}</span>
-                </Breadcrumb.Item>
-              ) : (
-                <Breadcrumb.Item key={index}>
-                  <Link to={pathname}>{item}</Link>
-                </Breadcrumb.Item>
-              )}
+              {last ? <span>{item}</span> : <Link to={pathname}>{item}</Link>}
             </React.Fragment>
-          ) : null
-        })}
-      </>
-    )
+          ),
+          key: item,
+        })
+      }
+    })
+
+    return extraBreadcrumbItems
   }
 
-  return <Breadcrumb className={styles['basic-breadcrumb']}>{itemRender()}</Breadcrumb>
+  return <Breadcrumb className={styles['basic-breadcrumb']} items={breadcrumbItems()} />
 }
 
 export default BasicBreadcrumb
