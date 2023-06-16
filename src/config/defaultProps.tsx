@@ -9,6 +9,7 @@ const defaultProps: DefaultConfigProps = {
   },
   siderWidth: 200,
   breadcrumb: true,
+  keepAlive: false,
   footer: false,
   headerTheme: false,
   navTheme: 'light',

@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Login from '@/pages/login'
-import React from 'react'
-import { Navigate, useRoutes } from 'react-router-dom'
+import { Spin } from 'antd'
+import React, { Suspense } from 'react'
+import KeepAlive from 'react-activation'
+import { Navigate, RouteObject, useRoutes } from 'react-router-dom'
 import { metaRoutersProps } from './interface'
 
 // * 导入所有router
@@ -35,8 +37,35 @@ export const rootRouter: metaRoutersProps[] = [
   },
 ]
 
+const loading = (
+  <div style={{ display: 'flex', height: '100vh' }}>
+    <Spin size='large' style={{ margin: 'auto' }} />
+  </div>
+)
+
+/** 懒加载处理 */
+const syncRouter = (routes: Array<metaRoutersProps>): RouteObject[] => {
+  const mRouteTable: RouteObject[] = []
+  routes.forEach(item => {
+    mRouteTable.push({
+      path: item.path,
+      element: (
+        <Suspense fallback={loading}>
+          {item.meta?.keepAlive ? (
+            <KeepAlive id={item.path}>{item.element}</KeepAlive>
+          ) : (
+            item.element
+          )}
+        </Suspense>
+      ),
+      children: item.children && syncRouter(item.children),
+    })
+  })
+  return mRouteTable
+}
+
 const Router = () => {
-  const routes = useRoutes(rootRouter)
+  const routes = useRoutes(syncRouter(rootRouter))
   return routes
 }
 

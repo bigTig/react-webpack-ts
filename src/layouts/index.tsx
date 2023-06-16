@@ -10,6 +10,7 @@ import classNames from 'classnames'
 import React, { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
+import AliveTag from './components/AliveTag'
 import BasicBreadcrumb from './components/BasicBreadcrumb'
 import BasicHeaderMenu from './components/BasicHeaderMenu'
 import BasicSider from './components/BasicSider'
@@ -32,7 +33,7 @@ const BasicLayout: React.FC = () => {
   const setBreadcrumbAtom = useSetRecoilState(breadcrumbAtom)
 
   const { sider, pageContainer } = globalSystemConfigState.token
-  const { layout, navTheme, siderWidth, breadcrumb } = globalSystemConfigState
+  const { layout, navTheme, siderWidth, breadcrumb, keepAlive } = globalSystemConfigState
 
   const basicSiderClassName = useEmotionCss(({ token }) => {
     return {
@@ -94,7 +95,8 @@ const BasicLayout: React.FC = () => {
           </Sider>
         ) : null}
         <Layout className={styles['basic-layout-container']}>
-          {breadcrumb ? <BasicBreadcrumb /> : null}
+          {breadcrumb && !keepAlive ? <BasicBreadcrumb /> : null}
+          {keepAlive ? <AliveTag /> : null}
           <Content
             style={{
               padding: pageContainer?.paddingInlinePageContainerContent,

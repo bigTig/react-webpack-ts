@@ -22,6 +22,7 @@ const dashboardRouter: metaRoutersProps[] = [
           title: '分析页',
           key: 'dataVisualize',
           auth: true,
+          keepAlive: true,
         },
       },
       {

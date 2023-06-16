@@ -8,6 +8,8 @@ export interface DefaultConfigProps {
   siderWidth: number
   /** 面包屑 */
   breadcrumb?: boolean
+  /** 是否缓存页面 */
+  keepAlive?: boolean
   /** 页脚 */
   footer?: boolean
   /**

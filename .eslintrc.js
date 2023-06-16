@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-var-requires': 0,
     'react-hooks/rules-of-hooks': 'error',
+    'react/jsx-uses-react': 2,
     'react-hooks/exhaustive-deps': [
       'warn',
       {

@@ -11,6 +11,8 @@ export interface MetaProps {
   key: string
   /** 图标 - 暂只支持 antd-icon */
   icon?: string
+  /** 是否缓存页面 */
+  keepAlive?: boolean
 }
 
 export interface metaRoutersProps {

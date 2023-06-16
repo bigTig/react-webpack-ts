@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { theme } from 'antd'
+import { Input, theme } from 'antd'
 import { RangePickerProps } from 'antd/es/date-picker/generatePicker'
 import type { Dayjs } from 'dayjs'
 import React, { useState } from 'react'
@@ -57,6 +57,7 @@ const Analysis: React.FC = () => {
 
   return (
     <div className={styles['analysis-container']}>
+      <Input />
       <IntroduceRow />
       <SalesCard
         rangePickerValue={rangePickerValue}
