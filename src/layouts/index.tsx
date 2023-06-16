@@ -100,7 +100,8 @@ const BasicLayout: React.FC = () => {
           <Content
             style={{
               padding: pageContainer?.paddingInlinePageContainerContent,
-              paddingTop: breadcrumb ? 0 : pageContainer?.paddingInlinePageContainerContent,
+              paddingTop:
+                breadcrumb || keepAlive ? 0 : pageContainer?.paddingInlinePageContainerContent,
             }}
           >
             <Outlet></Outlet>

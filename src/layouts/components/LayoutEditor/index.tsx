@@ -192,7 +192,26 @@ const LayoutEditor: React.FC<DrawerProps> = props => {
                   size='small'
                   checked={globalSystemConfigState.breadcrumb}
                   onChange={e =>
-                    setGlobalSystemConfigAtom({ ...globalSystemConfigState, breadcrumb: e })
+                    setGlobalSystemConfigAtom({
+                      ...globalSystemConfigState,
+                      breadcrumb: e,
+                      keepAlive: !e,
+                    })
+                  }
+                />
+              </li>
+              <li className={styles['container-setting-item']}>
+                <span>KeepAlive【与面包屑互斥】</span>
+                <Switch
+                  defaultChecked
+                  size='small'
+                  checked={globalSystemConfigState.keepAlive}
+                  onChange={e =>
+                    setGlobalSystemConfigAtom({
+                      ...globalSystemConfigState,
+                      keepAlive: e,
+                      breadcrumb: !e,
+                    })
                   }
                 />
               </li>
