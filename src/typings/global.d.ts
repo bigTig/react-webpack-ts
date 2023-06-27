@@ -1,5 +1,6 @@
 import { AliasToken } from 'antd/es/theme/internal'
 
+/** 系统默认配置 */
 export interface DefaultConfigProps {
   location: {
     pathname: string
@@ -58,4 +59,10 @@ export interface DefaultConfigProps {
       paddingBlockPageContainerContent?: number
     }
   }
+}
+
+/** 路由缓存模型 */
+export interface AliveTagProps {
+  url: string
+  title?: string
 }

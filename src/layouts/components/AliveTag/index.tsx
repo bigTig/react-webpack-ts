@@ -1,36 +1,64 @@
+import { aliveTagAtom } from '@/store/breadcrumb'
 import { Tag, theme } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useAliveController } from 'react-activation'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
 import styles from './index.less'
 
 const { useToken } = theme
-const { CheckableTag } = Tag
-
-const tagsData = ['Movies', 'Books', 'Music', 'Sports']
 
 /** 使用页面缓存时的tag页面标签 */
 const AliveTag: React.FC = () => {
   const { token } = useToken()
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const { dropScope } = useAliveController()
 
-  const [selectedTags, setSelectedTags] = useState<string[]>(['Movies'])
+  const [selectedTags, setSelectedTags] = useState(pathname)
+  const [aliveTagState, setAliveTagState] = useRecoilState(aliveTagAtom)
 
-  const handleChange = (tag: string, checked: boolean) => {
-    const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag)
-    setSelectedTags(nextSelectedTags)
+  /** 切换tab */
+  const handleChange = (e: React.MouseEvent<HTMLElement>, tag: string) => {
+    e.preventDefault()
+    if (tag === selectedTags) return
+    navigate(tag)
+    setSelectedTags(tag)
   }
 
-  return (
+  /** "卸载"仅可用于缓存状态下的节点 */
+  const handleDropTag = (e: React.MouseEvent<HTMLElement>, url: string) => {
+    e.preventDefault()
+    if (url === selectedTags) return
+    dropScope(url)
+    const filter = aliveTagState.filter(el => el.url !== url)
+    setAliveTagState(filter)
+  }
+
+  useEffect(() => {
+    setSelectedTags(pathname)
+  }, [pathname])
+
+  return aliveTagState.length ? (
     <div className={styles['alive-tag']}>
-      {tagsData.map(tag => (
-        <CheckableTag
-          key={tag}
-          checked={selectedTags.includes(tag)}
-          style={{ boxShadow: token.boxShadowTertiary }}
-          onChange={checked => handleChange(tag, checked)}
+      {aliveTagState.map(tag => (
+        <Tag
+          closable
+          color={selectedTags === tag.url ? token.colorPrimary : 'default'}
+          style={{
+            cursor: 'pointer',
+            backgroundColor: selectedTags !== tag.url ? token.colorWhite : token.colorPrimary,
+          }}
+          key={tag.url}
+          onClick={e => handleChange(e, tag.url)}
+          onClose={e => handleDropTag(e, tag.url)}
         >
-          {tag}
-        </CheckableTag>
+          {tag.title}
+        </Tag>
       ))}
     </div>
+  ) : (
+    <div style={{ paddingTop: token.paddingSM }} />
   )
 }
 

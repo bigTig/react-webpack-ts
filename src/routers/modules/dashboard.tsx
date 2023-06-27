@@ -32,6 +32,7 @@ const dashboardRouter: metaRoutersProps[] = [
           title: '内嵌页面',
           key: 'embedded',
           auth: true,
+          keepAlive: true,
         },
       },
       {

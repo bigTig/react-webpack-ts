@@ -4,10 +4,11 @@ import 'dayjs/locale/zh-cn'
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from 'react-router-dom'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Router, { rootRouter } from './routers'
 import { searchRoute } from './routers/utils'
 import AuthRouter from './routers/utils/authRouter'
+import { aliveTagAtom } from './store/breadcrumb'
 import { globalScreenWidthAtom, globalSystemConfigAtom, globalSystemTypeAtom } from './store/global'
 import { currentMenuAtom } from './store/menus'
 
@@ -15,6 +16,7 @@ const App = () => {
   const { pathname } = useLocation()
   const globalSystemConfigState = useRecoilValue(globalSystemConfigAtom)
   const setCurrentMenuAtom = useSetRecoilState(currentMenuAtom)
+  const [aliveTagState, setAliveTagState] = useRecoilState(aliveTagAtom)
   const currentMenuState = useRecoilValue(currentMenuAtom)
   const setGlobalSSystemTypeAtom = useSetRecoilState(globalSystemTypeAtom)
   const setGlobalSScreenWidthAtom = useSetRecoilState(globalScreenWidthAtom)
@@ -23,8 +25,13 @@ const App = () => {
   /** 刷新后根据地址栏获取当前路由 */
   useEffect(() => {
     const route = searchRoute(pathname, rootRouter)
+    const exist = aliveTagState.findIndex(el => el.url === route.path)
+    console.log(route)
+    if (exist === -1 && route.meta?.keepAlive) {
+      setAliveTagState([...aliveTagState, { url: route.path, title: route.meta?.title }])
+    }
     setCurrentMenuAtom(route)
-  }, [pathname, setCurrentMenuAtom])
+  }, [aliveTagState, pathname, setAliveTagState, setCurrentMenuAtom])
 
   /** 监听窗口大小变化 */
   useEffect(() => {
