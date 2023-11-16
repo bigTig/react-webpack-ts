@@ -1,10 +1,3 @@
-/*
- * @Description:
- * @Author: likaifeng
- * @Date: 2023-05-19 16:55:32
- * @LastEditTime: 2023-11-16 16:56:59
- * @LastEditors: likaifeng
- */
 import { DefaultConfigProps } from '@/typings/global'
 
 const titleLogo = require('@/assets/images/common/logo_simple.svg')
