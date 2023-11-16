@@ -85,7 +85,7 @@ const defaultProps: DefaultConfigProps = {
   logo: titleLogo,
   token: {
     token: {
-      colorPrimary: '#00b96b', // 品牌色是体现产品特性和传播理念最直观的视觉元素之一
+      colorPrimary: '#5988D8', // 品牌色是体现产品特性和传播理念最直观的视觉元素之一
       colorSuccess: '#7ed321', // 用于表示操作成功的 Token 序列
       colorWarning: '#FFC100', // 用于表示操作警告的 Token 序列
       colorInfo: '', // 用于表示操作信息的 Token 序列
