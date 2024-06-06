@@ -7,7 +7,7 @@ import { useRecoilValue } from 'recoil'
 import AccountForm from './components/AccountForm'
 import styles from './index.less'
 
-const BGURL = require('@/assets/images/common/login_bg.png')
+const LOGINBGM = require('@/assets/images/common/login_bgm.mp4')
 
 const { useToken } = theme
 
@@ -32,21 +32,24 @@ const Login: React.FC = () => {
   })
 
   return (
-    <div
-      className={styles['login-container']}
-      style={{
-        backgroundImage: globalSystemTypeState === 1 ? 'none' : `url(${BGURL})`,
-      }}
-    >
+    <div className={styles['login-container']}>
       <div className={classNames(styles.container, containerClassName)}>
         {globalSystemTypeState === 0 ? (
           <div className={styles['left-container']}>
             <a href='https://github.com/bigTig' target='_blank' rel='noreferrer'>
-              <div className={styles['left-logo']}>
+              <div className={styles['left-logo']} style={{ backgroundColor: token.colorPrimary }}>
                 <div className={styles.title}>程序猿阿峰·管理平台</div>
                 <div className={styles.tip}>与科技同行，与用户更近，欢迎 Star⭐</div>
               </div>
             </a>
+            <video
+              className={styles['left-login-bgm']}
+              src={LOGINBGM}
+              autoPlay
+              loop
+              preload=''
+              muted
+            ></video>
           </div>
         ) : null}
         <div className={classNames(styles['right-container'], rightClassName)}>
@@ -62,6 +65,7 @@ const Login: React.FC = () => {
           <AccountForm />
         </div>
       </div>
+      <video className={styles['login-bgm']} src={LOGINBGM} autoPlay loop preload='' muted></video>
     </div>
   )
 }

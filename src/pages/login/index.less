@@ -5,12 +5,14 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background-color: @body-background;
   align-items: center;
   justify-content: center;
-  background-color: @body-background;
   background-repeat: no-repeat;
 
   .container {
+    position: relative;
+    z-index: 9;
     display: flex;
     width: 1100px;
     overflow: hidden;
@@ -25,10 +27,18 @@
       width: 640px;
       height: 100%;
       overflow: hidden;
-      background-color: rgba(0, 185, 107, 62%);
-      background-image: url('@/assets/images/common/product_gallery_illustration.svg');
+      // background-color: rgba(0, 185, 107, 62%);
+      // background-image: url('@/assets/images/common/product_gallery_illustration.svg');
       background-repeat: no-repeat;
       background-position: center 352px;
+    }
+
+    .left-login-bgm {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      object-fit: contain;
     }
 
     .left-logo {
@@ -39,7 +49,8 @@
       width: 400px;
       height: 100px;
       margin: 0 auto;
-      background: rgba(255, 255, 255, 10.2%);
+      // background: rgba(255, 255, 255, 10.2%);
+      // background-color: @primary-color;
       border-radius: 8px;
       transform: translateX(-50%);
       align-items: center;
@@ -87,6 +98,16 @@
         font-size: 16px;
       }
     }
+  }
+
+  .login-bgm {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 

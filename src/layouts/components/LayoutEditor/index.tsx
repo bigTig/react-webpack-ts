@@ -43,8 +43,8 @@ const Sider = [
   { label: '顶部菜单布局', value: 'top' },
 ]
 const Primary = [
-  { label: '极光紫（默认）', value: '#00b96b' },
-  { label: '极光绿（默认）', value: '#00b96b' },
+  { label: '极光紫（默认）', value: '#5988D8' },
+  { label: '极光绿', value: '#00b96b' },
   { label: '拂晓蓝', value: '#1890ff' },
   { label: '酱紫', value: '#722ed1' },
   { label: '日暮', value: '#faad14' },
