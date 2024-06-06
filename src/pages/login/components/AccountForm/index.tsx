@@ -57,6 +57,7 @@ const AccountForm: React.FC = () => {
       <Form.Item>
         <Form.Item name='username' noStyle rules={[{ required: true, message: '请输入用户名' }]}>
           <Input
+            id='username'
             ref={usenameRef}
             onBlur={() => setActiveType('')}
             onFocus={() => setActiveType('Username')}
@@ -81,6 +82,7 @@ const AccountForm: React.FC = () => {
       <Form.Item>
         <Form.Item name='password' noStyle rules={[{ required: true, message: '请输入密码' }]}>
           <Input
+            id='password'
             ref={passwordRef}
             type='password'
             onBlur={() => setActiveType('')}
@@ -105,8 +107,8 @@ const AccountForm: React.FC = () => {
       </Form.Item>
       <Form.Item className={styles['ant-form-item-none-margin']}>
         <Space>
-          <Form.Item name='remember' valuePropName='checked' noStyle>
-            <Checkbox>记住密码</Checkbox>
+          <Form.Item valuePropName='checked' noStyle>
+            <Checkbox id='remember'>记住密码</Checkbox>
           </Form.Item>
 
           <a className={styles['login-form-forgot']} style={{ color: token.colorPrimary }}>
@@ -125,13 +127,13 @@ const AccountForm: React.FC = () => {
           },
         ]}
       >
-        <Checkbox>
+        <Checkbox id='agreement'>
           已阅读并同意 <a style={{ color: token.colorPrimary }}>《程序猿阿峰用户协议》</a>
         </Checkbox>
       </Form.Item>
 
       <Form.Item>
-        <Button type='primary' block htmlType='submit' className='login-form-button'>
+        <Button id='submit' type='primary' block htmlType='submit' className='login-form-button'>
           登 录
         </Button>
       </Form.Item>

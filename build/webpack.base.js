@@ -65,7 +65,7 @@ module.exports = {
         // less-loader: 解析less文件代码,把less编译为css
         // less: less核心
         test: cssRegex,
-        include: [path.resolve(__dirname, '../src')],
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../node_modules')],
         use: [
           // 开发环境使用style-looader,打包模式抽离css
           'style-loader',

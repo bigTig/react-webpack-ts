@@ -2,7 +2,9 @@ import { globalSystemTypeAtom } from '@/store/global'
 import { useEmotionCss } from '@ant-design/use-emotion-css'
 import { theme } from 'antd'
 import classNames from 'classnames'
-import React from 'react'
+import { driver } from 'driver.js'
+import 'driver.js/dist/driver.css'
+import React, { useLayoutEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import AccountForm from './components/AccountForm'
 import styles from './index.less'
@@ -31,13 +33,77 @@ const Login: React.FC = () => {
     }
   })
 
+  useLayoutEffect(() => {
+    const driverObj = driver({
+      showProgress: true,
+      stagePadding: 5,
+      progressText: 'Step {{current}} of {{total}}',
+      showButtons: ['next', 'previous'],
+      steps: [
+        {
+          element: '#leftLogo',
+          popover: {
+            title: '很高兴认识你！',
+            description: '来啦, 老弟！等你好久了！',
+            side: 'bottom',
+          },
+        },
+        {
+          element: '#logo',
+          popover: {
+            title: '欢迎 Star🌟',
+            description: '点击进入我的 GitHub 主页, 记得点个 🌟 哦',
+            side: 'bottom',
+          },
+        },
+        {
+          element: '#username',
+          popover: {
+            title: '用户名',
+            description: '默认用户名：admin',
+            side: 'bottom',
+          },
+        },
+        {
+          element: '#password',
+          popover: {
+            title: '密码',
+            description: '默认密码：admin123',
+            side: 'bottom',
+          },
+        },
+        {
+          element: '#agreement',
+          popover: {
+            title: '阅读协议',
+            description: '记得阅读协议哦',
+            side: 'bottom',
+          },
+        },
+        {
+          element: '#submit',
+          popover: {
+            title: '点我吧',
+            description: '点我就可以进入系统啦',
+            side: 'bottom',
+          },
+        },
+      ],
+    })
+    driverObj.drive()
+  }, [])
+
   return (
     <div className={styles['login-container']}>
       <div className={classNames(styles.container, containerClassName)}>
         {globalSystemTypeState === 0 ? (
           <div className={styles['left-container']}>
             <a href='https://github.com/bigTig' target='_blank' rel='noreferrer'>
-              <div className={styles['left-logo']} style={{ backgroundColor: token.colorPrimary }}>
+              <div
+                id='leftLogo'
+                className={styles['left-logo']}
+                style={{ backgroundColor: token.colorPrimary }}
+              >
                 <div className={styles.title}>程序猿阿峰·管理平台</div>
                 <div className={styles.tip}>与科技同行，与用户更近，欢迎 Star⭐</div>
               </div>
@@ -54,7 +120,7 @@ const Login: React.FC = () => {
         ) : null}
         <div className={classNames(styles['right-container'], rightClassName)}>
           <a href='https://github.com/bigTig' target='_blank' rel='noreferrer'>
-            <div className={styles.logo} />
+            <div id='logo' className={styles.logo} />
           </a>
           <div className={styles['logo-tip']} style={{ color: token.colorPrimary }}>
             Welcome back
