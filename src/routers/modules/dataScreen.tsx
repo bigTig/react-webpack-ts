@@ -11,6 +11,7 @@ const dataScreenRouter: metaRoutersProps[] = [
       auth: true,
       title: '数据大屏',
       key: 'dataScreen',
+      icon: 'FundProjectionScreenOutlined',
     },
   },
 ]

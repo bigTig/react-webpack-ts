@@ -65,7 +65,7 @@ const menuRouter: Array<metaRoutersProps> = [
             ],
             meta: {
               title: '菜单2-2',
-              key: 'menu221',
+              key: 'menu22',
               auth: true,
             },
           },
@@ -80,8 +80,8 @@ const menuRouter: Array<metaRoutersProps> = [
           },
         ],
         meta: {
-          title: '菜单2-1',
-          key: 'menu21',
+          title: '菜单2',
+          key: 'menu2',
           auth: true,
         },
       },

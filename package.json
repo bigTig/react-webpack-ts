@@ -62,7 +62,9 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.6.2",
     "react-sortable-hoc": "^2.0.0",
-    "recoil": "^0.7.6"
+    "recoil": "^0.7.6",
+    "svg-sprite-loader": "^6.0.11",
+    "svgo-loader": "^4.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

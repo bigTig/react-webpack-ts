@@ -106,10 +106,21 @@ module.exports = {
           'less-loader',
         ],
       },
+      // 配置svg图标
+      {
+        test: /.svg$/,
+        // 存放svg的文件夹
+        include: path.resolve('./src/icon/svg'),
+        use: [
+          { loader: 'svg-sprite-loader', options: {} },
+          { loader: 'svgo-loader', options: { symbolId: 'icon-[name]' } },
+        ],
+      },
       {
         // 匹配图片文件
         test: /.(png|jpg|jpeg|gif|svg)$/,
         type: 'asset', // type选择asset
+        exclude: [path.resolve(__dirname, '../src/icon/svg')], // 排除icon文件夹的svg文件
         parser: {
           dataUrlCondition: {
             maxSize: 10 * 1024, // 小于10kb转base64位
