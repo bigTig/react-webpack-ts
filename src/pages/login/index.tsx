@@ -4,7 +4,7 @@ import { theme } from 'antd'
 import classNames from 'classnames'
 import { driver } from 'driver.js'
 import 'driver.js/dist/driver.css'
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import AccountForm from './components/AccountForm'
 import styles from './index.less'
@@ -33,7 +33,7 @@ const Login: React.FC = () => {
     }
   })
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const driverObj = driver({
       showProgress: true,
       stagePadding: 5,

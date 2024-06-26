@@ -1,11 +1,12 @@
 import { DefaultConfigProps } from '@/typings/global'
+import { HOME_URL } from '.'
 
 const titleLogo = require('@/assets/images/common/logo_simple.svg')
 const avatar = require('@/assets/images/common/title_logo.svg')
 
 const defaultProps: DefaultConfigProps = {
   location: {
-    pathname: '/home/index',
+    pathname: HOME_URL,
   },
   siderWidth: 200,
   breadcrumb: true,

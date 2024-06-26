@@ -15,10 +15,10 @@ const NotFound = () => {
     <Result
       status='404'
       title='404'
-      subTitle='Sorry, the page you visited does not exist.'
+      subTitle='Sorry, 兄弟, 页面跟丢啦!'
       extra={
         <Button type='primary' onClick={goHome}>
-          Back Home
+          返回首页
         </Button>
       }
     />

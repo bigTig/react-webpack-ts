@@ -14,10 +14,10 @@ const NotAuth = () => {
     <Result
       status='403'
       title='403'
-      subTitle='Sorry, you are not authorized to access this page.'
+      subTitle='Sorry, 您当前没有权限访问该页面.'
       extra={
         <Button type='primary' onClick={goHome}>
-          Back Home
+          返回首页
         </Button>
       }
     />

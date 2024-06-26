@@ -14,10 +14,10 @@ const NotNetwork = () => {
     <Result
       status='500'
       title='500'
-      subTitle='Sorry, something went wrong.'
+      subTitle='Sorry, 哎呦, 网络出错了.'
       extra={
         <Button type='primary' onClick={goHome}>
-          Back Home
+          返回首页
         </Button>
       }
     />

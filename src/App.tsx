@@ -26,7 +26,6 @@ const App = () => {
   useEffect(() => {
     const route = searchRoute(pathname, rootRouter)
     const exist = aliveTagState.findIndex(el => el.url === route.path)
-    console.log(route)
     if (exist === -1 && route.meta?.keepAlive) {
       setAliveTagState([...aliveTagState, { url: route.path, title: route.meta?.title }])
     }

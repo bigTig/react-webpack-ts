@@ -50,8 +50,11 @@ const BasicSider: React.FC<BasicSiderProps> = props => {
   const navigate = useNavigate()
   const clickMenu: MenuProps['onClick'] = ({ key }: { key: string }) => {
     const route = searchRoute(key, menuList)
-    if (route.isLink) window.open(route.isLink, '_blank')
-    navigate(key)
+    if (route.isLink) {
+      window.open(route.isLink, '_blank')
+    } else {
+      navigate(key)
+    }
   }
 
   /** 打开菜单栏 */
