@@ -4,6 +4,4 @@ const requireAll = (requireContext: __WebpackModuleApi.RequireContext) =>
 
 requireAll(req)
 
-console.log(requireAll(req))
-
 export default requireAll(req)

@@ -75,6 +75,7 @@
     "@commitlint/cli": "^17.4.1",
     "@commitlint/config-conventional": "^17.4.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@svgr/webpack": "^8.1.0",
     "@types/history": "^4.7.7",
     "@types/jquery": "^3.5.16",
     "@types/lodash": "^4.14.191",

@@ -107,8 +107,9 @@ module.exports = {
         ],
       },
       // 配置svg图标
+      // 这里是直接用svg-sprite-loader来处理svg图标,
       {
-        test: /.svg$/,
+        test: /\.svg$/,
         // 存放svg的文件夹
         include: path.resolve('./src/icon/svg'),
         use: [
@@ -116,11 +117,27 @@ module.exports = {
           { loader: 'svgo-loader', options: { symbolId: 'icon-[name]' } },
         ],
       },
+      // @svgr/webpack 将svg转Component
+      {
+        test: /\.svg$/,
+        // 只有在这个文件夹下的svg才转换
+        include: path.resolve('./src/svg'),
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {},
+          },
+        ],
+      },
       {
         // 匹配图片文件
         test: /.(png|jpg|jpeg|gif|svg)$/,
         type: 'asset', // type选择asset
-        exclude: [path.resolve(__dirname, '../src/icon/svg')], // 排除icon文件夹的svg文件
+        exclude: [
+          // 排除指定文件夹的svg文件
+          path.resolve(__dirname, '../src/icon/svg'),
+          path.resolve(__dirname, '../src/svg'),
+        ], // 排除icon文件夹的svg文件
         parser: {
           dataUrlCondition: {
             maxSize: 10 * 1024, // 小于10kb转base64位
