@@ -30,6 +30,7 @@ const AuthRouter = (props: { children: any }) => {
     '/dashboard/analysis',
     '/dataScreen/analysis',
     '/icon/index',
+    '/icon/threeVR',
   ]
 
   // 5. Static Router(静态路由，必须配置首页地址，否则不能进首页获取菜单、按钮权限等数据)，获取数据的时候会loading，所有配置首页地址也没问题

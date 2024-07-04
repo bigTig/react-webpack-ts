@@ -8,7 +8,12 @@ const iconRouter: Array<metaRoutersProps> = [
   {
     element: <BasicLayout />,
     path: '/icon',
-    single: true,
+    meta: {
+      title: 'Demo',
+      key: 'Demo',
+      icon: 'CameraOutlined',
+      auth: true,
+    },
     children: [
       {
         path: '/icon/index',
@@ -17,6 +22,16 @@ const iconRouter: Array<metaRoutersProps> = [
           title: 'Svg图标',
           key: 'svg',
           icon: 'AppstoreOutlined',
+          auth: true,
+        },
+      },
+      {
+        path: '/icon/threeVR',
+        element: lazyLoad(React.lazy(() => import('@/pages/threeVR'))),
+        meta: {
+          title: 'ThreeVR',
+          key: 'ThreeVR',
+          icon: 'RocketOutlined',
           auth: true,
         },
       },
